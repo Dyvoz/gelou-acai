@@ -187,6 +187,28 @@
     .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(80px); background:var(--purple-dark); color:#fff; padding:11px 22px; border-radius:50px; font-weight:800; font-size:13.5px; box-shadow:0 8px 36px rgba(0,0,0,.25); transition:transform .3s cubic-bezier(.34,1.56,.64,1); z-index:1000; white-space:nowrap; pointer-events:none; border:1px solid rgba(255,255,255,.15); }
     .toast.show { transform:translateX(-50%) translateY(0); }
 
+    /* ── WHATSAPP CONFIRM MODAL ── */
+    .modal-backdrop { position:fixed; inset:0; background:rgba(20,8,40,.72); z-index:500; display:flex; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(4px); opacity:0; pointer-events:none; transition:opacity .22s; }
+    .modal-backdrop.show { opacity:1; pointer-events:all; }
+    .modal-box { background:#fff; border-radius:20px; padding:32px 28px 24px; max-width:400px; width:100%; box-shadow:0 24px 80px rgba(0,0,0,.3); transform:translateY(24px) scale(.97); transition:transform .25s cubic-bezier(.34,1.56,.64,1); text-align:center; }
+    .modal-backdrop.show .modal-box { transform:translateY(0) scale(1); }
+    .modal-icon { font-size:52px; margin-bottom:12px; }
+    .modal-title { font-size:20px; font-weight:900; color:var(--purple-dark); margin-bottom:8px; }
+    .modal-body  { font-size:14px; color:var(--muted); font-weight:600; line-height:1.6; margin-bottom:24px; }
+    .modal-body strong { color:var(--text); }
+    .modal-btns { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .modal-btn-yes { padding:13px; border:none; border-radius:10px; font-family:inherit; font-size:15px; font-weight:900; color:#fff; background:linear-gradient(135deg,var(--green-dark),var(--green)); cursor:pointer; transition:transform .14s,box-shadow .14s; }
+    .modal-btn-yes:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(91,168,74,.4); }
+    .modal-btn-no  { padding:13px; border:2px solid var(--border); border-radius:10px; font-family:inherit; font-size:15px; font-weight:900; color:var(--red); background:#fff; cursor:pointer; transition:background .14s,border-color .14s; }
+    .modal-btn-no:hover { background:var(--red-pale); border-color:#FFCDD2; }
+
+    /* ── PENDING STATUS ── */
+    .status-pending { background:#FFF8E1; color:#F57F17; border:1px solid #FFE082; }
+
+    /* ── BACKGROUND DOTS PATTERN ── */
+    body::before { content:''; position:fixed; inset:0; background-image:radial-gradient(circle, rgba(107,53,160,.06) 1px, transparent 1px); background-size:28px 28px; pointer-events:none; z-index:0; }
+    .main, header, .hero, .top-banner, footer { position:relative; z-index:1; }
+
     /* ── CONFIGURATOR STEP LABEL ── */
     .step-label { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; color:var(--purple); background:var(--purple-pale); border:1.5px solid var(--border); border-radius:50px; padding:4px 12px; display:inline-block; margin-bottom:14px; }
 
@@ -457,6 +479,23 @@
 </footer>
 
 <div class="toast" id="toast"></div>
+
+<!-- WHATSAPP CONFIRMATION MODAL -->
+<div class="modal-backdrop" id="waModal">
+  <div class="modal-box">
+    <div class="modal-icon">📱</div>
+    <div class="modal-title" id="modalTitle">Você enviou a mensagem?</div>
+    <div class="modal-body" id="modalBody">
+      O WhatsApp foi aberto com seu pedido.<br>
+      <strong>Abra o WhatsApp e pressione Enviar.</strong><br><br>
+      Confirme abaixo depois de enviar — só assim o pedido e seus pontos de fidelidade serão registrados.
+    </div>
+    <div class="modal-btns">
+      <button class="modal-btn-yes" onclick="confirmOrder(true)"  id="modalYes">✓ Sim, enviei!</button>
+      <button class="modal-btn-no"  onclick="confirmOrder(false)" id="modalNo">✗ Não enviei</button>
+    </div>
+  </div>
+</div>
 
 <script>
 /* ══════════════════════════════════
@@ -799,8 +838,10 @@ function loadUser() {
 }
 
 /* ══════════════════════════════════
-   PLACE ORDER
+   PLACE ORDER — step 1: open WA, show modal
 ══════════════════════════════════ */
+let _pendingOrder = null; // holds order data until user confirms
+
 function placeOrder() {
   if (cart.length === 0) { showToast(t('toastNeedCart')); return; }
   const addr = document.getElementById('userAddress').value.trim();
@@ -815,7 +856,7 @@ function placeOrder() {
   if (phone) msg += `📱 ${phone}\n`;
   msg += '\n';
 
-  cart.forEach((item, idx) => {
+  cart.forEach((item) => {
     msg += `*Açaí ${item.sizeMl===1000?'1 Litro':item.sizeMl+'ml'}* — ${fmt(itemTotal(item))}\n`;
     if (item.toppings.length) msg += `  🌾 ${item.toppings.map(id=>TOPPINGS.find(x=>x.id===id)?.pt||id).join(', ')}\n`;
     if (item.syrups.length)   msg += `  🍫 ${item.syrups.map(id=>SYRUPS.find(x=>x.id===id)?.pt||id).join(', ')}\n`;
@@ -826,40 +867,67 @@ function placeOrder() {
 
   msg += `🛵 *Entrega*\n📍 ${addr}\n`;
   msg += sub >= 30 ? '✅ Entrega grátis!\n' : '💳 Taxa de entrega: R$2,00\n';
-
   if (availableDiscounts() > 0) msg += `⭐ *Desconto fidelidade:* -R$10,00\n`;
   msg += `\n💰 *TOTAL: ${fmt(calcTotal())}*`;
 
-  // Save order to history
-  const order = {
+  // Store pending order — only committed if user confirms
+  _pendingOrder = {
     id:      Date.now().toString(),
     date:    new Date().toLocaleString(lang==='pt'?'pt-BR':'en-US'),
-    items:   cart.map(i => `${i.sizeMl===1000?'1L':i.sizeMl+'ml'}`).join(', '),
+    items:   cart.map(i=>`${i.sizeMl===1000?'1L':i.sizeMl+'ml'}`).join(', '),
     total:   calcTotal(),
+    spentAmt: sub + (sub < 30 ? 2 : 0),
     address: addr,
-    name:    name,
-    phone:   phone,
-    status:  'sent',
+    name, phone,
+    usedDiscount: availableDiscounts() > 0,
   };
-  const history = JSON.parse(localStorage.getItem('gelou_order_history') || '[]');
-  history.unshift(order);
-  localStorage.setItem('gelou_order_history', JSON.stringify(history.slice(0, 20)));
 
-  // Update loyalty
-  const spent = sub + (sub < 30 ? 2 : 0);
-  loy.totalSpent += spent;
-  loy.discountsEarned = Math.floor(loy.totalSpent / 100);
-  if (availableDiscounts() > 0) loy.discountsUsed++;
-  loy.orders++;
-  saveLoyalty(); updateLoyaltyUI(); renderHistory();
-
-  // Open WhatsApp
+  // Open WhatsApp (user must press Send themselves)
   window.open('https://wa.me/5522999585490?text=' + encodeURIComponent(msg), '_blank');
-  showToast(t('toastSuccess'));
 
-  // Clear cart
-  cart = [];
-  renderCart(); updateSummary();
+  // Show confirmation modal
+  updateModalLang();
+  document.getElementById('waModal').classList.add('show');
+}
+
+/* ══════════════════════════════════
+   CONFIRM ORDER — step 2: user tells us if sent
+══════════════════════════════════ */
+function confirmOrder(sent) {
+  document.getElementById('waModal').classList.remove('show');
+
+  if (!_pendingOrder) return;
+
+  if (sent) {
+    // Commit: save to history + update loyalty
+    const history = JSON.parse(localStorage.getItem('gelou_order_history') || '[]');
+    history.unshift({..._pendingOrder, status:'sent'});
+    localStorage.setItem('gelou_order_history', JSON.stringify(history.slice(0, 20)));
+
+    loy.totalSpent += _pendingOrder.spentAmt;
+    loy.discountsEarned = Math.floor(loy.totalSpent / 100);
+    if (_pendingOrder.usedDiscount) loy.discountsUsed++;
+    loy.orders++;
+    saveLoyalty(); updateLoyaltyUI(); renderHistory();
+
+    cart = [];
+    renderCart(); updateSummary();
+    showToast(t('toastSuccess'));
+  } else {
+    // User did NOT send — discard, keep cart intact
+    showToast(lang==='pt' ? '↩️ Pedido cancelado. Carrinho mantido.' : '↩️ Order cancelled. Cart kept.');
+  }
+  _pendingOrder = null;
+}
+
+function updateModalLang() {
+  const isPt = lang === 'pt';
+  document.getElementById('modalTitle').textContent = isPt ? 'Você enviou a mensagem?' : 'Did you send the message?';
+  document.getElementById('modalBody').innerHTML    = isPt
+    ? 'O WhatsApp foi aberto com seu pedido.<br><strong>Abra o WhatsApp e pressione Enviar.</strong><br><br>Confirme depois de enviar — só assim o pedido e seus pontos de fidelidade serão registrados.'
+    : 'WhatsApp was opened with your order.<br><strong>Open WhatsApp and press Send.</strong><br><br>Confirm below after sending — only then will the order and loyalty points be saved.';
+  document.getElementById('modalYes').textContent = isPt ? '✓ Sim, enviei!'  : '✓ Yes, sent!';
+  document.getElementById('modalNo').textContent  = isPt ? '✗ Não enviei'    : '✗ I did not send';
 }
 
 /* ══════════════════════════════════
