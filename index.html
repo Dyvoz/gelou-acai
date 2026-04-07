@@ -5,636 +5,244 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gelou Açaí</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --purple:        #6B35A0;
-      --purple-dark:   #4A1F75;
-      --purple-deep:   #3A1462;
-      --purple-light:  #9B5FD4;
-      --purple-pale:   #F0E8FF;
-      --blue:          #87BEDC;
-      --blue-pale:     #E5F3FA;
-      --green:         #7DC26B;
-      --green-dark:    #5BA84A;
-      --green-pale:    #EEF8EB;
-      --bg:            #F4EFFC;
-      --card:          #FFFFFF;
-      --text:          #1E1030;
-      --text-mid:      #4A3A6A;
-      --muted:         #8B80A8;
-      --border:        #DDD3F5;
-      --border-hover:  #B49ADE;
-      --shadow-sm:     0 2px 10px rgba(74,31,117,.09);
-      --shadow-md:     0 6px 28px rgba(74,31,117,.14);
-      --shadow-lg:     0 12px 48px rgba(74,31,117,.18);
-      --radius-sm:     10px;
-      --radius:        16px;
-      --radius-lg:     22px;
+      --purple:       #6B35A0;
+      --purple-dark:  #4A1F75;
+      --purple-deep:  #3A1462;
+      --purple-light: #9B5FD4;
+      --purple-pale:  #F0E8FF;
+      --blue:         #87BEDC;
+      --blue-pale:    #E5F3FA;
+      --green:        #7DC26B;
+      --green-dark:   #5BA84A;
+      --green-pale:   #EEF8EB;
+      --red:          #E53935;
+      --red-pale:     #FFEBEE;
+      --bg:           #F4EFFC;
+      --card:         #FFFFFF;
+      --text:         #1E1030;
+      --text-mid:     #4A3A6A;
+      --muted:        #8B80A8;
+      --border:       #DDD3F5;
+      --border-h:     #B49ADE;
+      --shadow-sm:    0 2px 10px rgba(74,31,117,.09);
+      --shadow-md:    0 6px 28px rgba(74,31,117,.14);
+      --shadow-lg:    0 12px 48px rgba(74,31,117,.18);
+      --r:            14px;
+      --r-sm:         10px;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
 
-    body {
-      font-family: 'Nunito', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-    }
+    /* ── BANNER ── */
+    .top-banner { background: linear-gradient(90deg,var(--green-dark),var(--green)); color:#fff; text-align:center; padding:9px 16px; font-size:13px; font-weight:800; letter-spacing:.4px; }
 
-    /* ────────────────────────────────────────────
-       DELIVERY BANNER
-    ──────────────────────────────────────────── */
-    .top-banner {
-      background: linear-gradient(90deg, var(--green-dark) 0%, var(--green) 100%);
-      color: #fff;
-      text-align: center;
-      padding: 10px 20px;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: .5px;
-    }
+    /* ── HEADER ── */
+    header { position:sticky; top:0; z-index:300; background:var(--purple-deep); box-shadow:0 4px 24px rgba(0,0,0,.28); }
+    .header-inner { max-width:1040px; margin:0 auto; padding:13px 20px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .logo-mark { width:40px; height:40px; background:#fff; border-radius:10px; display:grid; place-items:center; font-size:22px; flex-shrink:0; }
+    .logo-name { font-size:22px; font-weight:900; color:#fff; line-height:1; }
+    .logo-sub  { font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--blue); }
+    .header-right { display:flex; align-items:center; gap:8px; }
+    .pill { display:flex; align-items:center; gap:5px; padding:6px 13px; border-radius:50px; font-family:inherit; font-size:12px; font-weight:800; cursor:pointer; border:1.5px solid rgba(255,255,255,.25); background:rgba(255,255,255,.1); color:#fff; transition:background .18s; }
+    .pill:hover { background:rgba(255,255,255,.2); }
 
-    /* ────────────────────────────────────────────
-       HEADER
-    ──────────────────────────────────────────── */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 300;
-      background: var(--purple-deep);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      box-shadow: 0 4px 24px rgba(0,0,0,.28);
-    }
-    .header-inner {
-      max-width: 1040px;
-      margin: 0 auto;
-      padding: 14px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      text-decoration: none;
-    }
-    .logo-mark {
-      width: 42px; height: 42px;
-      background: #fff;
-      border-radius: 11px;
-      display: grid;
-      place-items: center;
-      font-size: 24px;
-      flex-shrink: 0;
-      box-shadow: 0 2px 10px rgba(0,0,0,.2);
-    }
-    .logo-wordmark { line-height: 1; }
-    .logo-wordmark span:first-child {
-      display: block;
-      font-size: 24px;
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: -.3px;
-    }
-    .logo-wordmark span:last-child {
-      display: block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--blue);
-    }
-    .header-actions { display: flex; align-items: center; gap: 9px; }
+    /* ── HERO ── */
+    .hero { position:relative; height:300px; overflow:hidden; display:flex; align-items:flex-end; }
+    .hero-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center top; }
+    .hero-overlay { position:absolute; inset:0; background:linear-gradient(to right,rgba(58,20,98,.85) 0%,rgba(58,20,98,.5) 45%,transparent 100%); }
+    .hero-content { position:relative; z-index:2; padding:0 36px 32px; max-width:500px; }
+    .hero-content h1 { font-size:32px; font-weight:900; color:#fff; line-height:1.1; margin-bottom:7px; }
+    .hero-content p  { font-size:14px; color:rgba(255,255,255,.85); margin-bottom:16px; font-weight:600; }
+    .hero-badges { display:flex; gap:7px; flex-wrap:wrap; }
+    .hero-badge { padding:5px 12px; border-radius:50px; background:rgba(255,255,255,.15); border:1.5px solid rgba(255,255,255,.3); font-size:11.5px; font-weight:700; color:#fff; }
 
-    .pill {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 15px;
-      border-radius: 50px;
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 800;
-      cursor: pointer;
-      border: 1.5px solid rgba(255,255,255,.25);
-      background: rgba(255,255,255,.1);
-      color: #fff;
-      transition: background .18s, border-color .18s;
-    }
-    .pill:hover { background: rgba(255,255,255,.2); border-color: rgba(255,255,255,.4); }
+    /* ── MAIN ── */
+    .main { max-width:860px; margin:0 auto; padding:24px 16px 56px; }
 
-    /* ────────────────────────────────────────────
-       HERO — banner image + overlay text
-    ──────────────────────────────────────────── */
-    .hero {
-      position: relative;
-      height: 320px;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-end;
-    }
-    .hero-img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
-    /* Gradient overlay so text is always legible */
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to right,
-        rgba(58,20,98,.82) 0%,
-        rgba(58,20,98,.55) 42%,
-        rgba(58,20,98,.15) 70%,
-        transparent 100%
-      );
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: 0 40px 36px;
-      max-width: 520px;
-    }
-    .hero-content h1 {
-      font-size: 36px;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.1;
-      margin-bottom: 8px;
-      text-shadow: 0 2px 12px rgba(0,0,0,.3);
-    }
-    .hero-content p {
-      font-size: 15px;
-      color: rgba(255,255,255,.85);
-      margin-bottom: 18px;
-      font-weight: 600;
-    }
-    .hero-badges {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .hero-badge {
-      padding: 5px 13px;
-      border-radius: 50px;
-      background: rgba(255,255,255,.15);
-      border: 1.5px solid rgba(255,255,255,.3);
-      font-size: 12px;
-      font-weight: 700;
-      color: #fff;
-      backdrop-filter: blur(4px);
-    }
+    /* ── SECTION CARD ── */
+    .card { background:var(--card); border-radius:var(--r); padding:20px 18px; margin-bottom:14px; box-shadow:var(--shadow-sm); border:1px solid var(--border); }
+    .card-header { display:flex; align-items:center; gap:11px; margin-bottom:16px; }
+    .card-icon { width:38px; height:38px; border-radius:9px; display:grid; place-items:center; font-size:18px; flex-shrink:0; }
+    .card-title    { font-size:16px; font-weight:900; color:var(--purple-dark); }
+    .card-subtitle { font-size:11.5px; color:var(--muted); font-weight:700; margin-top:2px; text-transform:uppercase; letter-spacing:.4px; }
+    .card-badge { margin-left:auto; background:var(--green-pale); color:var(--green-dark); border:1.5px solid var(--green); border-radius:50px; padding:3px 12px; font-size:12px; font-weight:900; white-space:nowrap; }
 
-    /* ────────────────────────────────────────────
-       MAIN LAYOUT
-    ──────────────────────────────────────────── */
-    .main {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 28px 18px 56px;
-    }
+    /* ── SIZE GRID ── */
+    .size-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:9px; }
+    @media(max-width:520px){ .size-grid { grid-template-columns:repeat(2,1fr); } }
+    .size-card { border:2px solid var(--border); border-radius:var(--r-sm); padding:14px 8px 12px; text-align:center; cursor:pointer; transition:border-color .16s,background .16s,transform .13s; position:relative; }
+    .size-card:hover { border-color:var(--purple-light); transform:translateY(-2px); }
+    .size-card.active { border-color:var(--purple); background:var(--purple-pale); box-shadow:0 0 0 3px rgba(107,53,160,.1); }
+    .size-card.active::after { content:'✓'; position:absolute; top:5px; right:7px; width:18px; height:18px; background:var(--purple); color:#fff; border-radius:50%; font-size:9px; font-weight:900; line-height:18px; text-align:center; }
+    .size-emoji { font-size:26px; margin-bottom:6px; }
+    .size-ml    { font-size:15px; font-weight:900; color:var(--purple); }
+    .size-price { font-size:14px; font-weight:800; color:var(--green-dark); margin-top:3px; }
 
-    /* ────────────────────────────────────────────
-       SECTION CARDS
-    ──────────────────────────────────────────── */
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 22px 20px 20px;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--border);
-    }
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      margin-bottom: 18px;
-    }
-    .card-icon {
-      width: 40px; height: 40px;
-      border-radius: var(--radius-sm);
-      display: grid;
-      place-items: center;
-      font-size: 19px;
-      flex-shrink: 0;
-    }
-    .card-title    { font-size: 17px; font-weight: 900; color: var(--purple-dark); }
-    .card-subtitle { font-size: 12px; color: var(--muted); font-weight: 700; margin-top: 2px; text-transform: uppercase; letter-spacing: .4px; }
-    .card-badge {
-      margin-left: auto;
-      background: var(--green-pale);
-      color: var(--green-dark);
-      border: 1.5px solid var(--green);
-      border-radius: 50px;
-      padding: 4px 13px;
-      font-size: 13px;
-      font-weight: 900;
-      white-space: nowrap;
-    }
+    /* ── ITEM CHIPS ── */
+    .item-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:7px; }
+    @media(max-width:380px){ .item-grid { grid-template-columns:repeat(2,1fr); } }
+    .item-chip { border:2px solid var(--border); border-radius:var(--r-sm); padding:10px 8px; text-align:center; cursor:pointer; user-select:none; background:#fff; transition:border-color .14s,background .14s,transform .12s; position:relative; }
+    .item-chip:hover:not(.locked) { border-color:var(--border-h); background:var(--purple-pale); transform:translateY(-2px); }
+    .item-chip.active { border-color:var(--purple); background:var(--purple-pale); }
+    .item-chip.active::after { content:'✓'; position:absolute; top:4px; right:6px; font-size:9px; color:var(--purple); font-weight:900; }
+    .item-chip.locked:not(.active) { opacity:.35; cursor:not-allowed; }
+    .chip-name  { font-size:12px; font-weight:800; color:var(--text); }
+    .chip-price { font-size:11px; font-weight:800; color:var(--green-dark); margin-top:3px; }
+    .chip-free  { font-size:10.5px; font-weight:700; color:var(--green-dark); margin-top:3px; opacity:.85; }
 
-    /* ────────────────────────────────────────────
-       SIZE GRID
-    ──────────────────────────────────────────── */
-    .size-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-    @media (max-width: 560px) { .size-grid { grid-template-columns: repeat(2, 1fr); } }
+    /* ── ADD TO CART BUTTON ── */
+    .add-btn { width:100%; padding:15px; border:none; border-radius:var(--r-sm); font-family:inherit; font-size:16px; font-weight:900; color:#fff; background:linear-gradient(135deg,var(--purple-dark),var(--purple)); cursor:pointer; transition:transform .14s,box-shadow .16s,opacity .14s; box-shadow:0 4px 18px rgba(107,53,160,.3); margin-bottom:14px; }
+    .add-btn:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 8px 28px rgba(107,53,160,.4); }
+    .add-btn:disabled { opacity:.38; cursor:not-allowed; box-shadow:none; }
 
-    .size-card {
-      border: 2px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 16px 10px 14px;
-      text-align: center;
-      cursor: pointer;
-      transition: border-color .18s, background .18s, transform .14s, box-shadow .18s;
-      position: relative;
-      background: #fff;
-    }
-    .size-card:hover {
-      border-color: var(--purple-light);
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-sm);
-    }
-    .size-card.active {
-      border-color: var(--purple);
-      background: var(--purple-pale);
-      box-shadow: 0 0 0 3px rgba(107,53,160,.12);
-    }
-    .size-card.active::after {
-      content: '✓';
-      position: absolute;
-      top: 6px; right: 8px;
-      width: 19px; height: 19px;
-      background: var(--purple);
-      color: #fff;
-      border-radius: 50%;
-      font-size: 10px;
-      font-weight: 900;
-      line-height: 19px;
-      text-align: center;
-    }
-    .size-emoji  { font-size: 28px; margin-bottom: 7px; }
-    .size-ml     { font-size: 17px; font-weight: 900; color: var(--purple); }
-    .size-price  { font-size: 15px; font-weight: 800; color: var(--green-dark); margin-top: 4px; }
+    /* ── CART SECTION ── */
+    .cart-section { background:var(--card); border-radius:var(--r); padding:20px 18px; margin-bottom:14px; box-shadow:var(--shadow-sm); border:1px solid var(--border); }
+    .cart-empty { text-align:center; padding:24px 0; color:var(--muted); font-weight:700; font-size:14px; }
+    .cart-item { border:2px solid var(--border); border-radius:var(--r-sm); padding:14px 14px 12px; margin-bottom:10px; position:relative; background:#FDFBFF; }
+    .cart-item-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+    .cart-item-title { font-size:15px; font-weight:900; color:var(--purple-dark); }
+    .cart-item-price { font-size:15px; font-weight:900; color:var(--green-dark); }
+    .cart-item-details { font-size:12px; color:var(--text-mid); line-height:1.7; font-weight:600; }
+    .cart-item-details span { display:inline-block; }
+    .cart-remove { position:absolute; top:10px; right:10px; background:var(--red-pale); border:1.5px solid #FFCDD2; color:var(--red); border-radius:6px; padding:3px 8px; font-size:11px; font-weight:800; cursor:pointer; transition:background .14s; font-family:inherit; }
+    .cart-remove:hover { background:#FFCDD2; }
+    .add-another-btn { width:100%; padding:12px; border:2px dashed var(--border-h); border-radius:var(--r-sm); background:transparent; font-family:inherit; font-size:14px; font-weight:800; color:var(--purple); cursor:pointer; transition:background .16s,border-color .16s; margin-top:4px; }
+    .add-another-btn:hover { background:var(--purple-pale); border-color:var(--purple); }
 
-    /* ────────────────────────────────────────────
-       ITEM CHIPS
-    ──────────────────────────────────────────── */
-    .item-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
-      gap: 8px;
-    }
-    @media (max-width: 400px) { .item-grid { grid-template-columns: repeat(2, 1fr); } }
+    /* ── USER INFO ── */
+    .field-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
+    @media(max-width:480px){ .field-row { grid-template-columns:1fr; } }
+    .field-label { font-size:11px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:4px; }
+    .field-input { width:100%; padding:11px 14px; border:2px solid var(--border); border-radius:var(--r-sm); font-family:inherit; font-size:14px; font-weight:700; color:var(--text); background:#fff; outline:none; transition:border-color .16s,box-shadow .16s; }
+    .field-input:focus { border-color:var(--purple); box-shadow:0 0 0 3px rgba(107,53,160,.1); }
+    .field-input::placeholder { color:var(--muted); font-weight:600; }
 
-    .item-chip {
-      border: 2px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 11px 9px;
-      text-align: center;
-      cursor: pointer;
-      user-select: none;
-      background: #fff;
-      transition: border-color .15s, background .15s, transform .12s;
-      position: relative;
-    }
-    .item-chip:hover:not(.locked) {
-      border-color: var(--border-hover);
-      background: var(--purple-pale);
-      transform: translateY(-2px);
-    }
-    .item-chip.active {
-      border-color: var(--purple);
-      background: var(--purple-pale);
-      box-shadow: 0 0 0 3px rgba(107,53,160,.1);
-    }
-    .item-chip.active::after {
-      content: '✓';
-      position: absolute;
-      top: 5px; right: 7px;
-      font-size: 10px;
-      color: var(--purple);
-      font-weight: 900;
-    }
-    .item-chip.locked:not(.active) { opacity: .35; cursor: not-allowed; }
-    .chip-name  { font-size: 12.5px; font-weight: 800; color: var(--text); }
-    .chip-price { font-size: 11.5px; font-weight: 800; color: var(--green-dark); margin-top: 4px; }
-    .chip-free  { font-size: 11px;   font-weight: 700; color: var(--green-dark); margin-top: 4px; opacity: .8; }
+    /* ── ORDER SUMMARY ── */
+    .summary-card { border-radius:var(--r); padding:20px 20px 16px; margin-bottom:13px; background:linear-gradient(135deg,var(--purple-deep) 0%,var(--purple) 100%); box-shadow:var(--shadow-lg); color:#fff; }
+    .summary-title { font-size:16px; font-weight:900; margin-bottom:13px; display:flex; align-items:center; gap:7px; }
+    .summary-line { display:flex; justify-content:space-between; align-items:baseline; padding:4px 0; font-size:13px; border-bottom:1px solid rgba(255,255,255,.1); gap:8px; }
+    .summary-line span:first-child { flex:1; opacity:.85; }
+    .summary-line span:last-child { font-weight:800; white-space:nowrap; }
+    .summary-line.discount-line span { color:#A8E083 !important; opacity:1 !important; }
+    .summary-total { display:flex; justify-content:space-between; align-items:baseline; padding-top:13px; font-size:22px; font-weight:900; }
 
-    /* ────────────────────────────────────────────
-       DELIVERY TOGGLE
-    ──────────────────────────────────────────── */
-    .delivery-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    @media (max-width: 400px) { .delivery-row { grid-template-columns: 1fr; } }
+    /* ── ORDER BUTTON ── */
+    .order-btn { width:100%; padding:16px; border:none; border-radius:var(--r-sm); font-family:inherit; font-size:16px; font-weight:900; color:#fff; background:linear-gradient(135deg,var(--green-dark),var(--green)); cursor:pointer; transition:transform .14s,box-shadow .16s,opacity .14s; margin-bottom:22px; box-shadow:0 4px 20px rgba(91,168,74,.3); }
+    .order-btn:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 8px 32px rgba(91,168,74,.45); }
+    .order-btn:disabled { opacity:.38; cursor:not-allowed; box-shadow:none; }
 
-    .delivery-opt {
-      border: 2px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 16px 12px;
-      text-align: center;
-      cursor: pointer;
-      background: #fff;
-      transition: border-color .18s, background .18s, transform .14s;
-    }
-    .delivery-opt:hover  { border-color: var(--border-hover); transform: translateY(-2px); }
-    .delivery-opt.active { border-color: var(--purple); background: var(--purple-pale); box-shadow: 0 0 0 3px rgba(107,53,160,.1); }
-    .opt-icon   { font-size: 26px; margin-bottom: 6px; }
-    .opt-label  { font-size: 15px; font-weight: 900; color: var(--purple-dark); }
-    .opt-detail { font-size: 12px; color: var(--muted); margin-top: 3px; font-weight: 700; }
+    /* ── ORDER HISTORY ── */
+    .history-toggle { width:100%; background:none; border:2px solid var(--border); border-radius:var(--r-sm); padding:13px 16px; font-family:inherit; font-size:14px; font-weight:800; color:var(--purple-dark); cursor:pointer; display:flex; align-items:center; justify-content:space-between; transition:background .16s,border-color .16s; margin-bottom:14px; }
+    .history-toggle:hover { background:var(--purple-pale); border-color:var(--purple-light); }
+    .history-toggle .arrow { transition:transform .2s; font-size:12px; }
+    .history-toggle.open .arrow { transform:rotate(180deg); }
+    .history-list { display:none; }
+    .history-list.open { display:block; }
+    .history-item { border:1.5px solid var(--border); border-radius:var(--r-sm); padding:13px 14px; margin-bottom:9px; background:#FDFBFF; }
+    .history-item-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+    .history-date { font-size:12px; color:var(--muted); font-weight:700; }
+    .history-total { font-size:14px; font-weight:900; color:var(--green-dark); }
+    .history-detail { font-size:12px; color:var(--text-mid); font-weight:600; line-height:1.6; }
+    .history-status { display:inline-block; padding:2px 10px; border-radius:50px; font-size:10.5px; font-weight:800; margin-top:6px; }
+    .status-sent   { background:#E8F5E9; color:#2E7D32; border:1px solid #A5D6A7; }
+    .status-pending { background:#FFF8E1; color:#F57F17; border:1px solid #FFE082; }
+    .history-empty { text-align:center; padding:20px 0; color:var(--muted); font-size:13px; font-weight:700; }
 
-    .address-wrap { margin-top: 13px; }
-    .address-input {
-      width: 100%;
-      padding: 12px 15px;
-      border: 2px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-family: inherit;
-      font-size: 14px;
-      outline: none;
-      color: var(--text);
-      background: #fff;
-      transition: border-color .18s, box-shadow .18s;
-    }
-    .address-input:focus {
-      border-color: var(--purple);
-      box-shadow: 0 0 0 3px rgba(107,53,160,.1);
-    }
-    .address-input::placeholder { color: var(--muted); }
+    /* ── LOYALTY CARD ── */
+    .loyalty-card { border-radius:18px; padding:24px 22px 20px; margin-bottom:14px; color:#fff; position:relative; overflow:hidden; background:linear-gradient(135deg,var(--purple-deep) 0%,#5C2890 55%,var(--purple-light) 100%); box-shadow:var(--shadow-lg); }
+    .loyalty-card::before { content:''; position:absolute; width:220px; height:220px; top:-70px; right:-50px; background:rgba(255,255,255,.06); border-radius:50%; pointer-events:none; }
+    .loyalty-card::after  { content:''; position:absolute; width:180px; height:180px; bottom:-60px; left:-30px; background:rgba(255,255,255,.05); border-radius:50%; pointer-events:none; }
+    .loyalty-label   { font-size:10px; font-weight:800; letter-spacing:3px; text-transform:uppercase; color:var(--blue); margin-bottom:3px; }
+    .loyalty-heading { font-size:20px; font-weight:900; margin-bottom:3px; }
+    .loyalty-sub     { font-size:12.5px; opacity:.78; margin-bottom:18px; font-weight:600; }
+    .loyalty-user    { font-size:13px; font-weight:800; opacity:.9; margin-bottom:14px; }
+    .progress-track { background:rgba(255,255,255,.18); border-radius:50px; height:10px; overflow:hidden; margin-bottom:6px; }
+    .progress-fill  { height:100%; border-radius:50px; background:linear-gradient(90deg,var(--green),#C5F078); transition:width .5s ease; }
+    .progress-labels { display:flex; justify-content:space-between; font-size:11.5px; font-weight:700; opacity:.78; }
+    .loyalty-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:18px; }
+    .stat-box { background:rgba(255,255,255,.11); border:1px solid rgba(255,255,255,.15); border-radius:10px; padding:11px 6px; text-align:center; }
+    .stat-value { font-size:18px; font-weight:900; }
+    .stat-label { font-size:9.5px; opacity:.72; margin-top:2px; text-transform:uppercase; letter-spacing:.5px; font-weight:700; }
+    .reset-btn { margin-top:13px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); color:rgba(255,255,255,.7); padding:5px 13px; border-radius:50px; font-family:inherit; font-weight:700; font-size:11px; cursor:pointer; transition:background .14s; }
+    .reset-btn:hover { background:rgba(255,255,255,.18); color:#fff; }
 
-    /* ────────────────────────────────────────────
-       ORDER SUMMARY
-    ──────────────────────────────────────────── */
-    .summary-card {
-      border-radius: var(--radius);
-      padding: 22px 22px 18px;
-      margin-bottom: 14px;
-      background: var(--purple-dark);
-      background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple) 100%);
-      box-shadow: var(--shadow-lg);
-      color: #fff;
-    }
-    .summary-title {
-      font-size: 17px;
-      font-weight: 900;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      letter-spacing: .2px;
-    }
-    .summary-line {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 5px 0;
-      font-size: 13.5px;
-      border-bottom: 1px solid rgba(255,255,255,.1);
-      gap: 10px;
-    }
-    .summary-line span:first-child { flex: 1; opacity: .88; }
-    .summary-line span:last-child  { font-weight: 800; white-space: nowrap; }
-    .discount-line span { color: #A8E083 !important; opacity: 1 !important; }
-    .summary-total {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding-top: 14px;
-      font-size: 24px;
-      font-weight: 900;
-      letter-spacing: -.3px;
-    }
+    /* ── CONTACT ── */
+    .contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px; }
+    .contact-link { display:flex; align-items:center; gap:11px; padding:14px; background:var(--purple-pale); border:1.5px solid var(--border); border-radius:var(--r-sm); text-decoration:none; color:var(--text); font-weight:700; transition:background .16s,transform .13s; }
+    .contact-link:hover { background:#EAE0FF; transform:translateY(-2px); }
+    .contact-icon  { width:40px; height:40px; border-radius:9px; display:grid; place-items:center; font-size:20px; flex-shrink:0; }
+    .contact-name  { font-size:13.5px; font-weight:900; color:var(--purple-dark); }
+    .contact-value { font-size:12px; color:var(--muted); font-weight:700; margin-top:1px; }
 
-    /* ────────────────────────────────────────────
-       ORDER BUTTON
-    ──────────────────────────────────────────── */
-    .order-btn {
-      width: 100%;
-      padding: 17px;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-family: inherit;
-      font-size: 17px;
-      font-weight: 900;
-      color: #fff;
-      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
-      cursor: pointer;
-      letter-spacing: .3px;
-      transition: transform .15s, box-shadow .18s, opacity .15s;
-      margin-bottom: 24px;
-      box-shadow: 0 4px 20px rgba(91,168,74,.3);
-    }
-    .order-btn:hover:not(:disabled) {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(91,168,74,.45);
-    }
-    .order-btn:active:not(:disabled) { transform: translateY(-1px); }
-    .order-btn:disabled { opacity: .38; cursor: not-allowed; box-shadow: none; }
+    /* ── FOOTER ── */
+    footer { background:var(--purple-deep); color:rgba(255,255,255,.65); text-align:center; padding:20px 16px; font-size:12.5px; font-weight:600; }
+    footer a { color:var(--blue); text-decoration:none; }
 
-    /* ────────────────────────────────────────────
-       LOYALTY CARD
-    ──────────────────────────────────────────── */
-    .loyalty-card {
-      border-radius: var(--radius-lg);
-      padding: 26px 24px 22px;
-      margin-bottom: 16px;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, var(--purple-deep) 0%, #5C2890 55%, var(--purple-light) 100%);
-      box-shadow: var(--shadow-lg);
-    }
-    /* decorative circles */
-    .loyalty-card::before, .loyalty-card::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-    }
-    .loyalty-card::before { width: 240px; height: 240px; top: -80px; right: -60px; background: rgba(255,255,255,.06); }
-    .loyalty-card::after  { width: 180px; height: 180px; bottom: -70px; left: -40px; background: rgba(255,255,255,.05); }
+    /* ── TOAST ── */
+    .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(80px); background:var(--purple-dark); color:#fff; padding:11px 22px; border-radius:50px; font-weight:800; font-size:13.5px; box-shadow:0 8px 36px rgba(0,0,0,.25); transition:transform .3s cubic-bezier(.34,1.56,.64,1); z-index:1000; white-space:nowrap; pointer-events:none; border:1px solid rgba(255,255,255,.15); }
+    .toast.show { transform:translateX(-50%) translateY(0); }
 
-    .loyalty-label {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 4px;
-      opacity: .9;
-    }
-    .loyalty-heading { font-size: 22px; font-weight: 900; margin-bottom: 3px; }
-    .loyalty-sub     { font-size: 13px; opacity: .78; margin-bottom: 22px; font-weight: 600; }
+    /* ── CONFIGURATOR STEP LABEL ── */
+    .step-label { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; color:var(--purple); background:var(--purple-pale); border:1.5px solid var(--border); border-radius:50px; padding:4px 12px; display:inline-block; margin-bottom:14px; }
 
-    .progress-track { background: rgba(255,255,255,.18); border-radius: 50px; height: 10px; overflow: hidden; margin-bottom: 7px; }
-    .progress-fill  { height: 100%; border-radius: 50px; background: linear-gradient(90deg, var(--green) 0%, #C5F078 100%); transition: width .5s ease; }
-    .progress-labels { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; opacity: .78; }
-
-    .loyalty-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px; }
-    .stat-box {
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 12px;
-      padding: 13px 8px;
-      text-align: center;
-    }
-    .stat-value { font-size: 19px; font-weight: 900; }
-    .stat-label { font-size: 10px; opacity: .72; margin-top: 3px; text-transform: uppercase; letter-spacing: .5px; font-weight: 700; }
-
-    .reset-btn {
-      margin-top: 14px;
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.2);
-      color: rgba(255,255,255,.7);
-      padding: 6px 14px;
-      border-radius: 50px;
-      font-family: inherit;
-      font-weight: 700;
-      font-size: 11px;
-      cursor: pointer;
-      letter-spacing: .3px;
-      transition: background .15s, color .15s;
-    }
-    .reset-btn:hover { background: rgba(255,255,255,.18); color: #fff; }
-
-    /* ────────────────────────────────────────────
-       CONTACT SECTION
-    ──────────────────────────────────────────── */
-    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 11px; }
-
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 15px;
-      background: var(--purple-pale);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-sm);
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 700;
-      transition: background .18s, border-color .18s, transform .14s, box-shadow .18s;
-    }
-    .contact-link:hover {
-      background: #EAE0FF;
-      border-color: var(--purple-light);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
-    }
-    .contact-icon  { width: 42px; height: 42px; border-radius: 9px; display: grid; place-items: center; font-size: 22px; flex-shrink: 0; }
-    .contact-name  { font-size: 14px; font-weight: 900; color: var(--purple-dark); }
-    .contact-value { font-size: 12.5px; color: var(--muted); font-weight: 700; margin-top: 2px; }
-
-    /* ────────────────────────────────────────────
-       FOOTER
-    ──────────────────────────────────────────── */
-    footer {
-      background: var(--purple-deep);
-      color: rgba(255,255,255,.65);
-      text-align: center;
-      padding: 22px 20px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-    footer a { color: var(--blue); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-
-    /* ────────────────────────────────────────────
-       TOAST
-    ──────────────────────────────────────────── */
-    .toast {
-      position: fixed;
-      bottom: 26px;
-      left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: var(--purple-dark);
-      color: #fff;
-      padding: 12px 24px;
-      border-radius: 50px;
-      font-weight: 800;
-      font-size: 14px;
-      box-shadow: 0 8px 36px rgba(0,0,0,.25);
-      transition: transform .3s cubic-bezier(.34,1.56,.64,1);
-      z-index: 1000;
-      white-space: nowrap;
-      pointer-events: none;
-      border: 1px solid rgba(255,255,255,.15);
-    }
-    .toast.show { transform: translateX(-50%) translateY(0); }
-
-    /* ────────────────────────────────────────────
-       RESPONSIVE
-    ──────────────────────────────────────────── */
-    @media (max-width: 600px) {
-      .hero { height: 260px; }
-      .hero-content h1 { font-size: 26px; }
-      .hero-content { padding: 0 22px 26px; }
-    }
-    @media (max-width: 400px) {
-      .loyalty-stats { grid-template-columns: repeat(3,1fr); }
+    @media(max-width:580px){
+      .hero { height:240px; }
+      .hero-content h1 { font-size:24px; }
+      .hero-content { padding:0 20px 24px; }
     }
   </style>
 </head>
 <body>
 
-<!-- TOP BANNER -->
-<div class="top-banner" id="banner">🛵 FRETE GRÁTIS para pedidos acima de R$30,00!</div>
+<div class="top-banner" id="banner">🛵 ENTREGA GRÁTIS para pedidos acima de R$30,00!</div>
 
-<!-- HEADER -->
 <header>
   <div class="header-inner">
     <a class="logo" href="#">
       <div class="logo-mark">🍇</div>
-      <div class="logo-wordmark">
-        <span>gelou</span>
-        <span>açaí</span>
+      <div>
+        <div class="logo-name">gelou</div>
+        <div class="logo-sub">açaí</div>
       </div>
     </a>
-    <div class="header-actions">
-      <div class="pill" onclick="scrollToLoyalty()">
-        ⭐ <span id="headerPts">0</span> pts
-      </div>
+    <div class="header-right">
+      <div class="pill" onclick="scrollToLoyalty()">⭐ <span id="headerPts">0</span> pts</div>
       <button class="pill" onclick="toggleLang()" id="langBtn">🇺🇸 EN</button>
     </div>
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <img class="hero-img" src="hero-banner.png" alt="Gelou Açaí" />
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <h1 id="heroTitle">O Melhor Açaí de BJ! 🍇</h1>
-    <p id="heroSub">Monte seu açaí do jeito que você ama</p>
+    <h1 id="heroTitle">Monte seu Açaí! 🍇</h1>
+    <p id="heroSub">Adicione quantos quiser ao carrinho</p>
     <div class="hero-badges">
-      <span class="hero-badge" id="badge1">📱 Peça pelo WhatsApp</span>
+      <span class="hero-badge" id="badge1">🛵 Só entrega</span>
       <span class="hero-badge" id="badge2">🎁 Até 4 complementos grátis</span>
       <span class="hero-badge" id="badge3">⭐ Programa de fidelidade</span>
     </div>
   </div>
 </section>
 
-<!-- MAIN -->
 <main class="main">
 
-  <!-- STEP 1: SIZE -->
+  <!-- ─── CONFIGURATOR ─────────────────────────────── -->
+  <div id="configuratorLabel" class="step-label">🍇 Configure seu Açaí</div>
+
+  <!-- SIZE -->
   <div class="card">
     <div class="card-header">
-      <div class="card-icon" style="background:var(--purple-pale);">🥤</div>
+      <div class="card-icon" style="background:var(--purple-pale)">🥤</div>
       <div>
-        <div class="card-title"  id="step1title">1. Escolha o Tamanho</div>
-        <div class="card-subtitle" id="step1sub">Selecione um tamanho para começar</div>
+        <div class="card-title" id="step1title">1. Tamanho</div>
+        <div class="card-subtitle" id="step1sub">Selecione um tamanho</div>
       </div>
     </div>
     <div class="size-grid">
@@ -661,35 +269,35 @@
     </div>
   </div>
 
-  <!-- STEP 2: TOPPINGS -->
+  <!-- TOPPINGS -->
   <div class="card">
     <div class="card-header">
-      <div class="card-icon" style="background:var(--blue-pale);">🌾</div>
+      <div class="card-icon" style="background:var(--blue-pale)">🌾</div>
       <div style="flex:1">
         <div class="card-title" id="step2title">2. Acompanhamentos</div>
-        <div class="card-subtitle" id="step2sub">Grátis — escolha até 4</div>
+        <div class="card-subtitle" id="step2sub">Grátis — até 4</div>
       </div>
       <div class="card-badge"><span id="toppingCount">0</span>/4</div>
     </div>
     <div class="item-grid" id="toppingGrid"></div>
   </div>
 
-  <!-- STEP 3: SYRUPS -->
+  <!-- SYRUPS -->
   <div class="card">
     <div class="card-header">
-      <div class="card-icon" style="background:#FFF3E0;">🍫</div>
+      <div class="card-icon" style="background:#FFF3E0">🍫</div>
       <div>
         <div class="card-title" id="step3title">3. Caldas</div>
-        <div class="card-subtitle" id="step3sub">Grátis — escolha à vontade</div>
+        <div class="card-subtitle" id="step3sub">Grátis — à vontade</div>
       </div>
     </div>
     <div class="item-grid" id="syrupGrid"></div>
   </div>
 
-  <!-- STEP 4: FRUITS -->
+  <!-- FRUITS -->
   <div class="card">
     <div class="card-header">
-      <div class="card-icon" style="background:#FFF0F5;">🍓</div>
+      <div class="card-icon" style="background:#FFF0F5">🍓</div>
       <div>
         <div class="card-title" id="step4title">4. Frutas</div>
         <div class="card-subtitle" id="step4sub">Adicionais pagos</div>
@@ -698,10 +306,10 @@
     <div class="item-grid" id="fruitGrid"></div>
   </div>
 
-  <!-- STEP 5: EXTRAS -->
+  <!-- EXTRAS -->
   <div class="card">
     <div class="card-header">
-      <div class="card-icon" style="background:var(--green-pale);">🍬</div>
+      <div class="card-icon" style="background:var(--green-pale)">🍬</div>
       <div>
         <div class="card-title" id="step5title">5. Adicionais</div>
         <div class="card-subtitle" id="step5sub">Adicionais pagos</div>
@@ -710,30 +318,51 @@
     <div class="item-grid" id="extraGrid"></div>
   </div>
 
-  <!-- STEP 6: DELIVERY -->
+  <!-- ADD TO CART -->
+  <button class="add-btn" id="addBtn" onclick="addToCart()" disabled>
+    🛒 <span id="addBtnText">Adicionar ao Carrinho</span>
+  </button>
+
+  <!-- ─── CART ─────────────────────────────────────── -->
+  <div class="cart-section" id="cartSection">
+    <div class="card-header" style="margin-bottom:14px">
+      <div class="card-icon" style="background:var(--purple-pale)">🛒</div>
+      <div style="flex:1">
+        <div class="card-title" id="cartTitle">Carrinho</div>
+        <div class="card-subtitle" id="cartSubtitle">Seus açaís selecionados</div>
+      </div>
+      <div class="card-badge" id="cartCount">0 itens</div>
+    </div>
+    <div id="cartItems">
+      <div class="cart-empty" id="cartEmpty">Nenhum açaí adicionado ainda 🍇</div>
+    </div>
+    <button class="add-another-btn" id="addAnotherBtn" onclick="scrollToConfigurator()" style="display:none">
+      + <span id="addAnotherText">Adicionar outro açaí</span>
+    </button>
+  </div>
+
+  <!-- ─── CHECKOUT ─────────────────────────────────── -->
   <div class="card">
     <div class="card-header">
-      <div class="card-icon" style="background:var(--purple-pale);">🛵</div>
+      <div class="card-icon" style="background:var(--blue-pale)">👤</div>
       <div>
-        <div class="card-title" id="step6title">6. Entrega ou Retirada?</div>
-        <div class="card-subtitle" id="step6sub">Frete grátis para pedidos acima de R$30</div>
+        <div class="card-title" id="userTitle">Seus Dados</div>
+        <div class="card-subtitle" id="userSub">Salvos para próximos pedidos</div>
       </div>
     </div>
-    <div class="delivery-row">
-      <div class="delivery-opt active" id="optDelivery" onclick="setDelivery(true)">
-        <div class="opt-icon">🛵</div>
-        <div class="opt-label" id="delivLabel">Entrega</div>
-        <div class="opt-detail" id="delivDetail">+ R$2,00</div>
+    <div class="field-row">
+      <div>
+        <div class="field-label" id="nameLabel">Nome</div>
+        <input class="field-input" id="userName" type="text" placeholder="Seu nome" oninput="saveUser()" />
       </div>
-      <div class="delivery-opt" id="optPickup" onclick="setDelivery(false)">
-        <div class="opt-icon">🏪</div>
-        <div class="opt-label" id="pickupLabel">Retirada</div>
-        <div class="opt-detail" id="pickupDetail">No estabelecimento</div>
+      <div>
+        <div class="field-label" id="phoneLabel">WhatsApp</div>
+        <input class="field-input" id="userPhone" type="tel" placeholder="(22) 99999-9999" oninput="saveUser()" />
       </div>
     </div>
-    <div class="address-wrap" id="addressWrap">
-      <input class="address-input" id="addressInput" type="text"
-             placeholder="Informe seu endereço para entrega..." />
+    <div>
+      <div class="field-label" id="addrLabel">Endereço de Entrega</div>
+      <input class="field-input" id="userAddress" type="text" placeholder="Rua, número, bairro..." oninput="saveUser()" />
     </div>
   </div>
 
@@ -752,11 +381,19 @@
     📱 <span id="orderBtnText">Fazer Pedido via WhatsApp</span>
   </button>
 
-  <!-- LOYALTY CARD -->
+  <!-- ─── ORDER HISTORY ─────────────────────────────── -->
+  <button class="history-toggle" id="historyToggle" onclick="toggleHistory()">
+    <span>📋 <span id="historyToggleText">Histórico de Pedidos</span></span>
+    <span class="arrow">▼</span>
+  </button>
+  <div class="history-list" id="historyList"></div>
+
+  <!-- ─── LOYALTY CARD ──────────────────────────────── -->
   <div class="loyalty-card" id="loyaltySection">
     <div class="loyalty-label" id="loyaltyLabel">Programa de Fidelidade</div>
     <div class="loyalty-heading" id="loyaltyTitle">⭐ Cartão de Fidelidade</div>
     <div class="loyalty-sub" id="loyaltySub">A cada R$100 em compras, ganhe R$10 de desconto!</div>
+    <div class="loyalty-user" id="loyaltyUser"></div>
     <div class="progress-track">
       <div class="progress-fill" id="progressFill" style="width:0%"></div>
     </div>
@@ -785,7 +422,7 @@
   <!-- CONTACT -->
   <div class="card">
     <div class="card-header">
-      <div class="card-icon" style="background:var(--purple-pale);">📞</div>
+      <div class="card-icon" style="background:var(--purple-pale)">📞</div>
       <div>
         <div class="card-title" id="contactTitle">Fale Conosco</div>
         <div class="card-subtitle" id="contactSub">Estamos aqui para você</div>
@@ -793,14 +430,14 @@
     </div>
     <div class="contact-grid">
       <a class="contact-link" href="https://wa.me/5522999585490" target="_blank" rel="noopener">
-        <div class="contact-icon" style="background:#E8F5E9;">📱</div>
+        <div class="contact-icon" style="background:#E8F5E9">📱</div>
         <div>
           <div class="contact-name">WhatsApp</div>
           <div class="contact-value">(22) 99958-5490</div>
         </div>
       </a>
       <a class="contact-link" href="https://instagram.com/geloubji" target="_blank" rel="noopener">
-        <div class="contact-icon" style="background:#FCE4EC;">📸</div>
+        <div class="contact-icon" style="background:#FCE4EC">📸</div>
         <div>
           <div class="contact-name">Instagram</div>
           <div class="contact-value">@geloubji</div>
@@ -811,23 +448,20 @@
 
 </main>
 
-<!-- FOOTER -->
 <footer>
   <p>© 2025 Gelou Açaí &nbsp;·&nbsp; Feito com 💜 &nbsp;·&nbsp;
-    <a href="https://wa.me/5522999585490">(22) 99958-5490</a>
-    &nbsp;·&nbsp;
+    <a href="https://wa.me/5522999585490">(22) 99958-5490</a> &nbsp;·&nbsp;
     <a href="https://instagram.com/geloubji">@geloubji</a>
   </p>
-  <p id="footerRights" style="margin-top:5px;font-size:11px;opacity:.5;">Todos os direitos reservados</p>
+  <p id="footerRights" style="margin-top:4px;font-size:11px;opacity:.5">Todos os direitos reservados</p>
 </footer>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-/* ══════════════════════════════════════════
-   DATA
-══════════════════════════════════════════ */
+/* ══════════════════════════════════
+   MENU DATA
+══════════════════════════════════ */
 const TOPPINGS = [
   {id:'pacoca',    pt:'Paçoca',       en:'Paçoca'},
   {id:'leite_po',  pt:'Leite em Pó',  en:'Powdered Milk'},
@@ -858,14 +492,21 @@ const EXTRAS = [
   {id:'bis',        pt:'Bis',         en:'Bis',          price:2},
 ];
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════════
    STATE
-══════════════════════════════════════════ */
-const st = {
-  lang:'pt', sizeMl:null, sizePrice:0,
+══════════════════════════════════ */
+let lang = 'pt';
+
+// Current item being configured
+const cur = {
+  sizeMl:null, sizePrice:0,
   toppings:new Set(), syrups:new Set(), fruits:new Set(), extras:new Set(),
-  delivery:true,
 };
+
+// Cart
+let cart = [];
+
+// Loyalty
 const loy = {
   totalSpent:      parseFloat(localStorage.getItem('gelou_total_spent')      || '0'),
   discountsEarned: parseInt(  localStorage.getItem('gelou_discounts_earned') || '0'),
@@ -873,182 +514,265 @@ const loy = {
   orders:          parseInt(  localStorage.getItem('gelou_orders')           || '0'),
 };
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════════
    TRANSLATIONS
-══════════════════════════════════════════ */
+══════════════════════════════════ */
 const T = {
-  banner:           {pt:'🛵 FRETE GRÁTIS para pedidos acima de R$30,00!',       en:'🛵 FREE DELIVERY on orders above R$30.00!'},
-  heroTitle:        {pt:'O Melhor Açaí de BJ! 🍇',                              en:'The Best Açaí in BJ! 🍇'},
-  heroSub:          {pt:'Monte seu açaí do jeito que você ama',                  en:'Build your açaí the way you love it'},
-  badge1:           {pt:'📱 Peça pelo WhatsApp',                                 en:'📱 Order via WhatsApp'},
-  badge2:           {pt:'🎁 Até 4 complementos grátis',                         en:'🎁 Up to 4 free toppings'},
-  badge3:           {pt:'⭐ Programa de fidelidade',                              en:'⭐ Loyalty program'},
-  step1title:       {pt:'1. Escolha o Tamanho',                                  en:'1. Choose Your Size'},
-  step1sub:         {pt:'Selecione um tamanho para começar',                     en:'Select a size to get started'},
-  step2title:       {pt:'2. Acompanhamentos',                                    en:'2. Toppings'},
-  step2sub:         {pt:'Grátis — escolha até 4',                               en:'Free — choose up to 4'},
-  step3title:       {pt:'3. Caldas',                                             en:'3. Syrups'},
-  step3sub:         {pt:'Grátis — escolha à vontade',                           en:'Free — choose as many as you like'},
-  step4title:       {pt:'4. Frutas',                                             en:'4. Fruits'},
-  step4sub:         {pt:'Adicionais pagos',                                      en:'Paid extras'},
-  step5title:       {pt:'5. Adicionais',                                         en:'5. Extras'},
-  step5sub:         {pt:'Adicionais pagos',                                      en:'Paid extras'},
-  step6title:       {pt:'6. Entrega ou Retirada?',                              en:'6. Delivery or Pickup?'},
-  step6sub:         {pt:'Frete grátis para pedidos acima de R$30',              en:'Free delivery on orders above R$30'},
-  delivLabel:       {pt:'Entrega',                                               en:'Delivery'},
-  delivDetail:      {pt:'+ R$2,00',                                              en:'+ R$2.00'},
-  pickupLabel:      {pt:'Retirada',                                              en:'Pickup'},
-  pickupDetail:     {pt:'No estabelecimento',                                    en:'At the store'},
-  addrPlaceholder:  {pt:'Informe seu endereço para entrega...',                  en:'Enter your delivery address...'},
-  summaryTitle:     {pt:'Resumo do Pedido',                                      en:'Order Summary'},
-  totalLabel:       {pt:'Total',                                                 en:'Total'},
-  orderBtnText:     {pt:'Fazer Pedido via WhatsApp',                             en:'Order via WhatsApp'},
-  loyaltyLabel:     {pt:'Programa de Fidelidade',                               en:'Loyalty Program'},
-  loyaltyTitle:     {pt:'⭐ Cartão de Fidelidade',                               en:'⭐ Loyalty Card'},
-  loyaltySub:       {pt:'A cada R$100 em compras, ganhe R$10 de desconto!',      en:'Every R$100 spent, earn R$10 off!'},
-  statSpentLabel:   {pt:'Total Gasto',                                           en:'Total Spent'},
-  statDiscountLabel:{pt:'Desconto',                                              en:'Discount'},
-  statOrdersLabel:  {pt:'Pedidos',                                               en:'Orders'},
-  resetBtn:         {pt:'Resetar dados (debug)',                                 en:'Reset data (debug)'},
-  contactTitle:     {pt:'Fale Conosco',                                          en:'Contact Us'},
-  contactSub:       {pt:'Estamos aqui para você',                               en:'We are here for you'},
-  footerRights:     {pt:'Todos os direitos reservados',                          en:'All rights reserved'},
-  freeLabel:        {pt:'Grátis',                                                en:'Free'},
-  freeDelivery:     {pt:'🎉 Frete Grátis!',                                      en:'🎉 Free Delivery!'},
-  deliveryFee:      {pt:'Entrega',                                               en:'Delivery'},
-  loyaltyDisc:      {pt:'⭐ Desconto Fidelidade',                                en:'⭐ Loyalty Discount'},
-  toppingsLabel:    {pt:'Acompanhamentos',                                       en:'Toppings'},
-  syrupsLabel:      {pt:'Caldas',                                                en:'Syrups'},
-  toastMaxTopping:  {pt:'Máximo 4 acompanhamentos!',                            en:'Max 4 toppings!'},
-  toastNoAddr:      {pt:'Por favor, informe seu endereço!',                      en:'Please enter your address!'},
-  toastSuccess:     {pt:'✅ Pedido enviado via WhatsApp!',                        en:'✅ Order sent via WhatsApp!'},
-  toastReset:       {pt:'Dados resetados!',                                      en:'Data reset!'},
-  confirmReset:     {pt:'Resetar todos os dados de fidelidade?',                 en:'Reset all loyalty data?'},
-  chipFree:         {pt:'✓ grátis',                                              en:'✓ free'},
-  noItems:          {pt:'Nenhum item selecionado ainda.',                        en:'No items selected yet.'},
+  banner:           {pt:'🛵 ENTREGA GRÁTIS para pedidos acima de R$30,00!',        en:'🛵 FREE DELIVERY on orders above R$30.00!'},
+  heroTitle:        {pt:'Monte seu Açaí! 🍇',                                       en:'Build Your Açaí! 🍇'},
+  heroSub:          {pt:'Adicione quantos quiser ao carrinho',                       en:'Add as many as you like to the cart'},
+  badge1:           {pt:'🛵 Só entrega',                                            en:'🛵 Delivery only'},
+  badge2:           {pt:'🎁 Até 4 complementos grátis',                            en:'🎁 Up to 4 free toppings'},
+  badge3:           {pt:'⭐ Programa de fidelidade',                                en:'⭐ Loyalty program'},
+  configuratorLabel:{pt:'🍇 Configure seu Açaí',                                   en:'🍇 Build your Açaí'},
+  step1title:       {pt:'1. Tamanho',                                               en:'1. Size'},
+  step1sub:         {pt:'Selecione um tamanho',                                     en:'Select a size'},
+  step2title:       {pt:'2. Acompanhamentos',                                       en:'2. Toppings'},
+  step2sub:         {pt:'Grátis — até 4',                                          en:'Free — up to 4'},
+  step3title:       {pt:'3. Caldas',                                                en:'3. Syrups'},
+  step3sub:         {pt:'Grátis — à vontade',                                      en:'Free — unlimited'},
+  step4title:       {pt:'4. Frutas',                                                en:'4. Fruits'},
+  step4sub:         {pt:'Adicionais pagos',                                         en:'Paid extras'},
+  step5title:       {pt:'5. Adicionais',                                            en:'5. Extras'},
+  step5sub:         {pt:'Adicionais pagos',                                         en:'Paid extras'},
+  addBtnText:       {pt:'Adicionar ao Carrinho',                                    en:'Add to Cart'},
+  cartTitle:        {pt:'Carrinho',                                                 en:'Cart'},
+  cartSubtitle:     {pt:'Seus açaís selecionados',                                 en:'Your selected açaís'},
+  cartEmpty:        {pt:'Nenhum açaí adicionado ainda 🍇',                         en:'No açaí added yet 🍇'},
+  addAnotherText:   {pt:'Adicionar outro açaí',                                    en:'Add another açaí'},
+  userTitle:        {pt:'Seus Dados',                                               en:'Your Info'},
+  userSub:          {pt:'Salvos para próximos pedidos',                            en:'Saved for future orders'},
+  nameLabel:        {pt:'Nome',                                                     en:'Name'},
+  phoneLabel:       {pt:'WhatsApp',                                                 en:'WhatsApp'},
+  addrLabel:        {pt:'Endereço de Entrega',                                     en:'Delivery Address'},
+  namePh:           {pt:'Seu nome',                                                 en:'Your name'},
+  phonePh:          {pt:'(22) 99999-9999',                                         en:'(22) 99999-9999'},
+  addrPh:           {pt:'Rua, número, bairro...',                                  en:'Street, number, neighbourhood...'},
+  summaryTitle:     {pt:'Resumo do Pedido',                                         en:'Order Summary'},
+  totalLabel:       {pt:'Total',                                                    en:'Total'},
+  orderBtnText:     {pt:'Fazer Pedido via WhatsApp',                               en:'Order via WhatsApp'},
+  historyToggleText:{pt:'Histórico de Pedidos',                                    en:'Order History'},
+  historyEmpty:     {pt:'Nenhum pedido ainda.',                                     en:'No orders yet.'},
+  loyaltyLabel:     {pt:'Programa de Fidelidade',                                  en:'Loyalty Program'},
+  loyaltyTitle:     {pt:'⭐ Cartão de Fidelidade',                                  en:'⭐ Loyalty Card'},
+  loyaltySub:       {pt:'A cada R$100 em compras, ganhe R$10 de desconto!',         en:'Every R$100 spent, earn R$10 off!'},
+  statSpentLabel:   {pt:'Total Gasto',                                              en:'Total Spent'},
+  statDiscountLabel:{pt:'Desconto',                                                 en:'Discount'},
+  statOrdersLabel:  {pt:'Pedidos',                                                  en:'Orders'},
+  resetBtn:         {pt:'Resetar dados (debug)',                                    en:'Reset data (debug)'},
+  contactTitle:     {pt:'Fale Conosco',                                             en:'Contact Us'},
+  contactSub:       {pt:'Estamos aqui para você',                                  en:'We are here for you'},
+  footerRights:     {pt:'Todos os direitos reservados',                             en:'All rights reserved'},
+  freeLabel:        {pt:'Grátis',                                                   en:'Free'},
+  freeDelivery:     {pt:'🎉 Entrega Grátis!',                                       en:'🎉 Free Delivery!'},
+  deliveryFee:      {pt:'Entrega',                                                  en:'Delivery'},
+  loyaltyDisc:      {pt:'⭐ Desconto Fidelidade',                                   en:'⭐ Loyalty Discount'},
+  toppingsLbl:      {pt:'Acompanhamentos',                                          en:'Toppings'},
+  syrupsLbl:        {pt:'Caldas',                                                   en:'Syrups'},
+  fruitsLbl:        {pt:'Frutas',                                                   en:'Fruits'},
+  extrasLbl:        {pt:'Adicionais',                                               en:'Extras'},
+  chipFree:         {pt:'✓ grátis',                                                 en:'✓ free'},
+  toastAdded:       {pt:'✅ Açaí adicionado ao carrinho!',                          en:'✅ Açaí added to cart!'},
+  toastMaxTop:      {pt:'Máximo 4 acompanhamentos!',                               en:'Max 4 toppings!'},
+  toastNeedSize:    {pt:'Escolha um tamanho!',                                      en:'Please choose a size!'},
+  toastNeedCart:    {pt:'Adicione pelo menos um açaí ao carrinho!',                en:'Add at least one açaí to the cart!'},
+  toastNeedAddr:    {pt:'Informe seu endereço de entrega!',                        en:'Please enter your delivery address!'},
+  toastSuccess:     {pt:'✅ Pedido enviado via WhatsApp!',                           en:'✅ Order sent via WhatsApp!'},
+  toastReset:       {pt:'Dados resetados!',                                         en:'Data reset!'},
+  confirmReset:     {pt:'Resetar todos os dados de fidelidade?',                   en:'Reset all loyalty data?'},
+  statusSent:       {pt:'Enviado',                                                  en:'Sent'},
+  removeItem:       {pt:'Remover',                                                  en:'Remove'},
+  noItems:          {pt:'Carrinho vazio',                                           en:'Cart is empty'},
 };
-const t = k => T[k] ? T[k][st.lang] : k;
-const fmt = n => n < 0
-  ? `-R$${Math.abs(n).toFixed(2).replace('.',',')}`
-  : `R$${n.toFixed(2).replace('.',',')}`;
+const t = k => T[k] ? T[k][lang] : k;
+const fmt = n => n < 0 ? `-R$${Math.abs(n).toFixed(2).replace('.',',')}` : `R$${n.toFixed(2).replace('.',',')}`;
 
-/* ══════════════════════════════════════════
-   RENDER GRIDS
-══════════════════════════════════════════ */
+/* ══════════════════════════════════
+   ITEM CALC
+══════════════════════════════════ */
+function itemTotal(item) {
+  let s = item.sizePrice;
+  item.fruits.forEach(id => { const f=FRUITS.find(x=>x.id===id); if(f) s+=f.price; });
+  item.extras.forEach(id => { const e=EXTRAS.find(x=>x.id===id); if(e) s+=e.price; });
+  return s;
+}
+function cartSubtotal() { return cart.reduce((s,i) => s+itemTotal(i), 0); }
+function availableDiscounts() { return loy.discountsEarned - loy.discountsUsed; }
+function calcTotal() {
+  let s = cartSubtotal();
+  if (s < 30 && s > 0) s += 2;
+  if (availableDiscounts() > 0 && s > 0) s = Math.max(0, s - 10);
+  return s;
+}
+
+/* ══════════════════════════════════
+   RENDER CONFIGURATOR GRIDS
+══════════════════════════════════ */
 function renderToppingGrid() {
   document.getElementById('toppingGrid').innerHTML = TOPPINGS.map(item => {
-    const sel  = st.toppings.has(item.id);
-    const lock = !sel && st.toppings.size >= 4;
+    const sel = cur.toppings.has(item.id);
+    const lock = !sel && cur.toppings.size >= 4;
     return `<div class="item-chip${sel?' active':''}${lock?' locked':''}" onclick="toggleTopping('${item.id}')">
-              <div class="chip-name">${item[st.lang]}</div>
+              <div class="chip-name">${item[lang]}</div>
               <div class="chip-free">${t('chipFree')}</div>
             </div>`;
   }).join('');
 }
 function renderSyrupGrid() {
   document.getElementById('syrupGrid').innerHTML = SYRUPS.map(item => {
-    const sel = st.syrups.has(item.id);
+    const sel = cur.syrups.has(item.id);
     return `<div class="item-chip${sel?' active':''}" onclick="toggleSyrup('${item.id}')">
-              <div class="chip-name">${item[st.lang]}</div>
+              <div class="chip-name">${item[lang]}</div>
               <div class="chip-free">${t('chipFree')}</div>
             </div>`;
   }).join('');
 }
 function renderFruitGrid() {
   document.getElementById('fruitGrid').innerHTML = FRUITS.map(item => {
-    const sel = st.fruits.has(item.id);
+    const sel = cur.fruits.has(item.id);
     return `<div class="item-chip${sel?' active':''}" onclick="toggleFruit('${item.id}')">
-              <div class="chip-name">${item[st.lang]}</div>
+              <div class="chip-name">${item[lang]}</div>
               <div class="chip-price">+${fmt(item.price)}</div>
             </div>`;
   }).join('');
 }
 function renderExtraGrid() {
   document.getElementById('extraGrid').innerHTML = EXTRAS.map(item => {
-    const sel = st.extras.has(item.id);
+    const sel = cur.extras.has(item.id);
     return `<div class="item-chip${sel?' active':''}" onclick="toggleExtra('${item.id}')">
-              <div class="chip-name">${item[st.lang]}</div>
+              <div class="chip-name">${item[lang]}</div>
               <div class="chip-price">+${fmt(item.price)}</div>
             </div>`;
   }).join('');
 }
 
-/* ══════════════════════════════════════════
-   INTERACTIONS
-══════════════════════════════════════════ */
+/* ══════════════════════════════════
+   CONFIGURATOR INTERACTIONS
+══════════════════════════════════ */
 function selectSize(el, ml, price) {
   document.querySelectorAll('.size-card').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
-  st.sizeMl = ml; st.sizePrice = price;
-  document.getElementById('orderBtn').disabled = false;
-  updateSummary();
+  cur.sizeMl = ml; cur.sizePrice = price;
+  document.getElementById('addBtn').disabled = false;
 }
 function toggleTopping(id) {
-  if (st.toppings.has(id)) { st.toppings.delete(id); }
-  else if (st.toppings.size < 4) { st.toppings.add(id); }
-  else { showToast(t('toastMaxTopping')); return; }
-  document.getElementById('toppingCount').textContent = st.toppings.size;
-  renderToppingGrid(); updateSummary();
+  if (cur.toppings.has(id)) { cur.toppings.delete(id); }
+  else if (cur.toppings.size < 4) { cur.toppings.add(id); }
+  else { showToast(t('toastMaxTop')); return; }
+  document.getElementById('toppingCount').textContent = cur.toppings.size;
+  renderToppingGrid();
 }
-function toggleSyrup(id)  { st.syrups.has(id) ? st.syrups.delete(id) : st.syrups.add(id); renderSyrupGrid(); updateSummary(); }
-function toggleFruit(id)  { st.fruits.has(id) ? st.fruits.delete(id) : st.fruits.add(id); renderFruitGrid(); updateSummary(); }
-function toggleExtra(id)  { st.extras.has(id) ? st.extras.delete(id) : st.extras.add(id); renderExtraGrid(); updateSummary(); }
+function toggleSyrup(id)  { cur.syrups.has(id) ? cur.syrups.delete(id) : cur.syrups.add(id); renderSyrupGrid(); }
+function toggleFruit(id)  { cur.fruits.has(id) ? cur.fruits.delete(id) : cur.fruits.add(id); renderFruitGrid(); }
+function toggleExtra(id)  { cur.extras.has(id) ? cur.extras.delete(id) : cur.extras.add(id); renderExtraGrid(); }
 
-function setDelivery(val) {
-  st.delivery = val;
-  document.getElementById('optDelivery').classList.toggle('active',  val);
-  document.getElementById('optPickup').classList.toggle('active',   !val);
-  document.getElementById('addressWrap').style.display = val ? 'block' : 'none';
-  updateSummary();
+/* ══════════════════════════════════
+   CART
+══════════════════════════════════ */
+function addToCart() {
+  if (!cur.sizeMl) { showToast(t('toastNeedSize')); return; }
+  cart.push({
+    id: Date.now().toString(),
+    sizeMl:    cur.sizeMl,
+    sizePrice: cur.sizePrice,
+    toppings:  [...cur.toppings],
+    syrups:    [...cur.syrups],
+    fruits:    [...cur.fruits],
+    extras:    [...cur.extras],
+  });
+  // Reset configurator
+  cur.sizeMl = null; cur.sizePrice = 0;
+  cur.toppings.clear(); cur.syrups.clear(); cur.fruits.clear(); cur.extras.clear();
+  document.querySelectorAll('.size-card').forEach(c => c.classList.remove('active'));
+  document.getElementById('addBtn').disabled = true;
+  document.getElementById('toppingCount').textContent = '0';
+  renderToppingGrid(); renderSyrupGrid(); renderFruitGrid(); renderExtraGrid();
+  renderCart(); updateSummary();
+  showToast(t('toastAdded'));
 }
 
-/* ══════════════════════════════════════════
-   SUMMARY & TOTALS
-══════════════════════════════════════════ */
-function calcSubtotal() {
-  let s = st.sizePrice;
-  FRUITS.forEach(f => { if (st.fruits.has(f.id)) s += f.price; });
-  EXTRAS.forEach(e => { if (st.extras.has(e.id)) s += e.price; });
-  return s;
-}
-function availableDiscounts() { return loy.discountsEarned - loy.discountsUsed; }
-function calcTotal() {
-  let s = calcSubtotal();
-  if (st.delivery && s < 30) s += 2;
-  if (availableDiscounts() > 0) s = Math.max(0, s - 10);
-  return s;
+function removeFromCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  renderCart(); updateSummary();
 }
 
+function renderCart() {
+  const container = document.getElementById('cartItems');
+  const emptyEl   = document.getElementById('cartEmpty');
+  const addAnother = document.getElementById('addAnotherBtn');
+  const countBadge = document.getElementById('cartCount');
+
+  countBadge.textContent = `${cart.length} ${lang==='pt'? (cart.length===1?'item':'itens') : (cart.length===1?'item':'items')}`;
+
+  if (cart.length === 0) {
+    container.innerHTML = `<div class="cart-empty">${t('cartEmpty')}</div>`;
+    addAnother.style.display = 'none';
+    document.getElementById('orderBtn').disabled = true;
+    return;
+  }
+
+  addAnother.style.display = 'block';
+  document.getElementById('orderBtn').disabled = false;
+
+  container.innerHTML = cart.map((item, idx) => {
+    const details = [];
+    if (item.toppings.length) {
+      const names = item.toppings.map(id => TOPPINGS.find(x=>x.id===id)?.[lang] || id).join(', ');
+      details.push(`🌾 ${names}`);
+    }
+    if (item.syrups.length) {
+      const names = item.syrups.map(id => SYRUPS.find(x=>x.id===id)?.[lang] || id).join(', ');
+      details.push(`🍫 ${names}`);
+    }
+    if (item.fruits.length) {
+      const names = item.fruits.map(id => { const f=FRUITS.find(x=>x.id===id); return f?`${f[lang]} (+${fmt(f.price)})`:id; }).join(', ');
+      details.push(`🍓 ${names}`);
+    }
+    if (item.extras.length) {
+      const names = item.extras.map(id => { const e=EXTRAS.find(x=>x.id===id); return e?`${e[lang]} (+${fmt(e.price)})`:id; }).join(', ');
+      details.push(`🍬 ${names}`);
+    }
+    return `<div class="cart-item">
+      <button class="cart-remove" onclick="removeFromCart('${item.id}')">${t('removeItem')}</button>
+      <div class="cart-item-header">
+        <span class="cart-item-title">🥤 Açaí ${item.sizeMl===1000?'1 Litro':item.sizeMl+'ml'}</span>
+        <span class="cart-item-price">${fmt(itemTotal(item))}</span>
+      </div>
+      ${details.length ? `<div class="cart-item-details">${details.join('<br>')}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function scrollToConfigurator() {
+  document.getElementById('configuratorLabel').scrollIntoView({behavior:'smooth'});
+}
+
+/* ══════════════════════════════════
+   ORDER SUMMARY
+══════════════════════════════════ */
 function updateSummary() {
   const lines = [];
-  const sub   = calcSubtotal();
+  const sub   = cartSubtotal();
 
-  if (st.sizeMl) {
-    lines.push({label:`Açaí ${st.sizeMl===1000?'1 Litro':st.sizeMl+'ml'}`, price:st.sizePrice});
-  }
-  if (st.toppings.size > 0) {
-    const names = [...st.toppings].map(id => TOPPINGS.find(x=>x.id===id)[st.lang]).join(', ');
-    lines.push({label:`${t('toppingsLabel')}: ${names}`, price:0, free:true});
-  }
-  if (st.syrups.size > 0) {
-    const names = [...st.syrups].map(id => SYRUPS.find(x=>x.id===id)[st.lang]).join(', ');
-    lines.push({label:`${t('syrupsLabel')}: ${names}`, price:0, free:true});
-  }
-  FRUITS.forEach(f => { if (st.fruits.has(f.id)) lines.push({label:f[st.lang], price:f.price}); });
-  EXTRAS.forEach(e => { if (st.extras.has(e.id)) lines.push({label:e[st.lang], price:e.price}); });
+  cart.forEach((item, idx) => {
+    lines.push({label:`Açaí ${item.sizeMl===1000?'1 Litro':item.sizeMl+'ml'}${cart.length>1?` #${idx+1}`:''}`, price:itemTotal(item)});
+  });
 
-  if (st.delivery) {
-    lines.push(sub >= 30
-      ? {label:t('freeDelivery'), price:0, free:true}
-      : {label:t('deliveryFee'), price:2});
+  if (cart.length > 0) {
+    if (sub >= 30) {
+      lines.push({label:t('freeDelivery'), price:0, free:true});
+    } else {
+      lines.push({label:`${t('deliveryFee')} ${lang==='pt'?'(grátis acima de R$30)':'(free above R$30)'}`, price:2});
+    }
   }
-  if (availableDiscounts() > 0) {
+
+  if (availableDiscounts() > 0 && cart.length > 0) {
     lines.push({label:t('loyaltyDisc'), price:-10, discount:true});
   }
 
   const el = document.getElementById('summaryLines');
   el.innerHTML = lines.length === 0
-    ? `<div class="summary-line" style="opacity:.45"><span>${t('noItems')}</span></div>`
+    ? `<div class="summary-line" style="opacity:.4"><span>${t('noItems')}</span></div>`
     : lines.map(l => {
         const pStr = l.free ? t('freeLabel') : fmt(l.price);
         return `<div class="summary-line${l.discount?' discount-line':''}">
@@ -1056,54 +780,125 @@ function updateSummary() {
                 </div>`;
       }).join('');
 
-  document.getElementById('totalValue').textContent = fmt(calcTotal());
+  document.getElementById('totalValue').textContent = fmt(cart.length>0 ? calcTotal() : 0);
 }
 
-/* ══════════════════════════════════════════
-   ORDER VIA WHATSAPP
-══════════════════════════════════════════ */
+/* ══════════════════════════════════
+   USER DATA
+══════════════════════════════════ */
+function saveUser() {
+  localStorage.setItem('gelou_user_name',    document.getElementById('userName').value);
+  localStorage.setItem('gelou_user_phone',   document.getElementById('userPhone').value);
+  localStorage.setItem('gelou_user_address', document.getElementById('userAddress').value);
+  updateLoyaltyUI();
+}
+function loadUser() {
+  document.getElementById('userName').value    = localStorage.getItem('gelou_user_name')    || '';
+  document.getElementById('userPhone').value   = localStorage.getItem('gelou_user_phone')   || '';
+  document.getElementById('userAddress').value = localStorage.getItem('gelou_user_address') || '';
+}
+
+/* ══════════════════════════════════
+   PLACE ORDER
+══════════════════════════════════ */
 function placeOrder() {
-  if (!st.sizeMl) return;
-  if (st.delivery && !document.getElementById('addressInput').value.trim()) {
-    showToast(t('toastNoAddr')); return;
-  }
-  let msg = '🍇 *PEDIDO GELOU AÇAÍ*\n\n';
-  msg += `📏 *Tamanho:* ${st.sizeMl===1000?'1 Litro':st.sizeMl+'ml'} — ${fmt(st.sizePrice)}\n`;
-  if (st.toppings.size > 0) {
-    msg += `🌾 *Acompanhamentos:* ${[...st.toppings].map(id=>TOPPINGS.find(x=>x.id===id).pt).join(', ')}\n`;
-  }
-  if (st.syrups.size > 0) {
-    msg += `🍫 *Caldas:* ${[...st.syrups].map(id=>SYRUPS.find(x=>x.id===id).pt).join(', ')}\n`;
-  }
-  FRUITS.forEach(f => { if (st.fruits.has(f.id)) msg += `🍓 *${f.pt}:* +${fmt(f.price)}\n`; });
-  EXTRAS.forEach(e => { if (st.extras.has(e.id)) msg += `🍬 *${e.pt}:* +${fmt(e.price)}\n`; });
+  if (cart.length === 0) { showToast(t('toastNeedCart')); return; }
+  const addr = document.getElementById('userAddress').value.trim();
+  if (!addr) { showToast(t('toastNeedAddr')); return; }
+
+  const name  = document.getElementById('userName').value.trim();
+  const phone = document.getElementById('userPhone').value.trim();
+  const sub   = cartSubtotal();
+
+  let msg = `🍇 *PEDIDO GELOU AÇAÍ*\n`;
+  if (name)  msg += `👤 *${name}*\n`;
+  if (phone) msg += `📱 ${phone}\n`;
   msg += '\n';
-  if (st.delivery) {
-    const addr = document.getElementById('addressInput').value.trim();
-    const sub  = calcSubtotal();
-    msg += `🛵 *Entrega*\n📍 ${addr}\n`;
-    msg += sub >= 30 ? '✅ Frete grátis!\n' : '💳 Taxa: R$2,00\n';
-  } else {
-    msg += '🏪 *Retirada no estabelecimento*\n';
-  }
+
+  cart.forEach((item, idx) => {
+    msg += `*Açaí ${item.sizeMl===1000?'1 Litro':item.sizeMl+'ml'}* — ${fmt(itemTotal(item))}\n`;
+    if (item.toppings.length) msg += `  🌾 ${item.toppings.map(id=>TOPPINGS.find(x=>x.id===id)?.pt||id).join(', ')}\n`;
+    if (item.syrups.length)   msg += `  🍫 ${item.syrups.map(id=>SYRUPS.find(x=>x.id===id)?.pt||id).join(', ')}\n`;
+    if (item.fruits.length)   msg += `  🍓 ${item.fruits.map(id=>{const f=FRUITS.find(x=>x.id===id);return f?`${f.pt} (+${fmt(f.price)})`:id;}).join(', ')}\n`;
+    if (item.extras.length)   msg += `  🍬 ${item.extras.map(id=>{const e=EXTRAS.find(x=>x.id===id);return e?`${e.pt} (+${fmt(e.price)})`:id;}).join(', ')}\n`;
+    msg += '\n';
+  });
+
+  msg += `🛵 *Entrega*\n📍 ${addr}\n`;
+  msg += sub >= 30 ? '✅ Entrega grátis!\n' : '💳 Taxa de entrega: R$2,00\n';
+
   if (availableDiscounts() > 0) msg += `⭐ *Desconto fidelidade:* -R$10,00\n`;
   msg += `\n💰 *TOTAL: ${fmt(calcTotal())}*`;
 
+  // Save order to history
+  const order = {
+    id:      Date.now().toString(),
+    date:    new Date().toLocaleString(lang==='pt'?'pt-BR':'en-US'),
+    items:   cart.map(i => `${i.sizeMl===1000?'1L':i.sizeMl+'ml'}`).join(', '),
+    total:   calcTotal(),
+    address: addr,
+    name:    name,
+    phone:   phone,
+    status:  'sent',
+  };
+  const history = JSON.parse(localStorage.getItem('gelou_order_history') || '[]');
+  history.unshift(order);
+  localStorage.setItem('gelou_order_history', JSON.stringify(history.slice(0, 20)));
+
   // Update loyalty
-  const spent = calcSubtotal() + (st.delivery && calcSubtotal() < 30 ? 2 : 0);
-  loy.totalSpent      += spent;
-  loy.discountsEarned  = Math.floor(loy.totalSpent / 100);
+  const spent = sub + (sub < 30 ? 2 : 0);
+  loy.totalSpent += spent;
+  loy.discountsEarned = Math.floor(loy.totalSpent / 100);
   if (availableDiscounts() > 0) loy.discountsUsed++;
   loy.orders++;
-  saveLoyalty(); updateLoyaltyUI();
+  saveLoyalty(); updateLoyaltyUI(); renderHistory();
 
+  // Open WhatsApp
   window.open('https://wa.me/5522999585490?text=' + encodeURIComponent(msg), '_blank');
   showToast(t('toastSuccess'));
+
+  // Clear cart
+  cart = [];
+  renderCart(); updateSummary();
 }
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════════
+   ORDER HISTORY
+══════════════════════════════════ */
+function toggleHistory() {
+  const btn  = document.getElementById('historyToggle');
+  const list = document.getElementById('historyList');
+  btn.classList.toggle('open');
+  list.classList.toggle('open');
+  if (list.classList.contains('open')) renderHistory();
+}
+
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem('gelou_order_history') || '[]');
+  const list    = document.getElementById('historyList');
+  if (history.length === 0) {
+    list.innerHTML = `<div class="history-empty">${t('historyEmpty')}</div>`;
+    return;
+  }
+  list.innerHTML = history.map(o => `
+    <div class="history-item">
+      <div class="history-item-header">
+        <span class="history-date">${o.date}${o.name ? ' · ' + o.name : ''}</span>
+        <span class="history-total">${fmt(o.total)}</span>
+      </div>
+      <div class="history-detail">
+        🥤 ${o.items}<br>
+        📍 ${o.address}
+        ${o.phone ? `<br>📱 ${o.phone}` : ''}
+      </div>
+      <span class="history-status status-sent">${t('statusSent')} ✓</span>
+    </div>
+  `).join('');
+}
+
+/* ══════════════════════════════════
    LOYALTY
-══════════════════════════════════════════ */
+══════════════════════════════════ */
 function saveLoyalty() {
   localStorage.setItem('gelou_total_spent',      loy.totalSpent.toString());
   localStorage.setItem('gelou_discounts_earned', loy.discountsEarned.toString());
@@ -1112,12 +907,23 @@ function saveLoyalty() {
 }
 function updateLoyaltyUI() {
   const cycle = loy.totalSpent % 100;
-  document.getElementById('progressFill').style.width = Math.min((cycle/100)*100, 100) + '%';
+  const avail = availableDiscounts();
+  const name  = document.getElementById('userName').value.trim();
+  const phone = document.getElementById('userPhone').value.trim();
+
+  document.getElementById('progressFill').style.width = Math.min((cycle/100)*100,100)+'%';
   document.getElementById('progressLabel').textContent = `R$${cycle.toFixed(0)} / R$100`;
   document.getElementById('statSpent').textContent    = `R$${loy.totalSpent.toFixed(0)}`;
-  document.getElementById('statDiscount').textContent = `R$${(availableDiscounts()*10).toFixed(0)}`;
+  document.getElementById('statDiscount').textContent = `R$${(avail*10).toFixed(0)}`;
   document.getElementById('statOrders').textContent   = loy.orders;
   document.getElementById('headerPts').textContent    = Math.round(loy.totalSpent);
+
+  const loyUser = document.getElementById('loyaltyUser');
+  if (name || phone) {
+    loyUser.textContent = `👤 ${name || ''}${name && phone ? ' · ' : ''}${phone || ''}`;
+  } else {
+    loyUser.textContent = '';
+  }
   updateSummary();
 }
 function scrollToLoyalty() {
@@ -1130,51 +936,48 @@ function resetLoyalty() {
   showToast(t('toastReset'));
 }
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════════
    LANGUAGE TOGGLE
-══════════════════════════════════════════ */
+══════════════════════════════════ */
 function applyLang() {
   const ids = [
     'banner','heroTitle','heroSub','badge1','badge2','badge3',
-    'step1title','step1sub','step2title','step2sub',
-    'step3title','step3sub','step4title','step4sub',
-    'step5title','step5sub','step6title','step6sub',
-    'delivLabel','delivDetail','pickupLabel','pickupDetail',
-    'summaryTitle','totalLabel','orderBtnText',
+    'configuratorLabel','step1title','step1sub','step2title','step2sub',
+    'step3title','step3sub','step4title','step4sub','step5title','step5sub',
+    'addBtnText','cartTitle','cartSubtitle','addAnotherText',
+    'userTitle','userSub','nameLabel','phoneLabel','addrLabel',
+    'summaryTitle','totalLabel','orderBtnText','historyToggleText',
     'loyaltyLabel','loyaltyTitle','loyaltySub',
-    'statSpentLabel','statDiscountLabel','statOrdersLabel',
-    'resetBtn','contactTitle','contactSub','footerRights',
+    'statSpentLabel','statDiscountLabel','statOrdersLabel','resetBtn',
+    'contactTitle','contactSub','footerRights',
   ];
-  ids.forEach(id => {
-    const el = document.getElementById(id);
-    if (el && T[id]) el.textContent = T[id][st.lang];
-  });
-  document.getElementById('addressInput').placeholder = t('addrPlaceholder');
-  document.getElementById('langBtn').textContent = st.lang === 'pt' ? '🇺🇸 EN' : '🇧🇷 PT';
+  ids.forEach(id => { const el=document.getElementById(id); if(el&&T[id]) el.textContent=T[id][lang]; });
+  document.getElementById('userName').placeholder    = t('namePh');
+  document.getElementById('userPhone').placeholder   = t('phonePh');
+  document.getElementById('userAddress').placeholder = t('addrPh');
+  document.getElementById('langBtn').textContent     = lang==='pt' ? '🇺🇸 EN' : '🇧🇷 PT';
   renderToppingGrid(); renderSyrupGrid(); renderFruitGrid(); renderExtraGrid();
-  updateSummary();
+  renderCart(); updateSummary(); renderHistory();
 }
-function toggleLang() { st.lang = st.lang === 'pt' ? 'en' : 'pt'; applyLang(); }
+function toggleLang() { lang = lang==='pt' ? 'en' : 'pt'; applyLang(); }
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════════
    TOAST
-══════════════════════════════════════════ */
-let _toastTimer;
+══════════════════════════════════ */
+let _tt;
 function showToast(msg) {
   const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  clearTimeout(_toastTimer);
-  _toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(_tt); _tt = setTimeout(() => el.classList.remove('show'), 3200);
 }
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════════
    BOOT
-══════════════════════════════════════════ */
+══════════════════════════════════ */
 (function init() {
+  loadUser();
   renderToppingGrid(); renderSyrupGrid(); renderFruitGrid(); renderExtraGrid();
-  updateSummary(); updateLoyaltyUI();
-  document.getElementById('addressWrap').style.display = 'block';
+  renderCart(); updateSummary(); updateLoyaltyUI();
 })();
 </script>
 </body>
