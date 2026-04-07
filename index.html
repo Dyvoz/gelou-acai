@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gelou Açaí</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --purple:        #6B35A0;
+      --purple-dark:   #4A1F75;
+      --purple-deep:   #3A1462;
+      --purple-light:  #9B5FD4;
+      --purple-pale:   #F0E8FF;
+      --blue:          #87BEDC;
+      --blue-pale:     #E5F3FA;
+      --green:         #7DC26B;
+      --green-dark:    #5BA84A;
+      --green-pale:    #EEF8EB;
+      --bg:            #F4EFFC;
+      --card:          #FFFFFF;
+      --text:          #1E1030;
+      --text-mid:      #4A3A6A;
+      --muted:         #8B80A8;
+      --border:        #DDD3F5;
+      --border-hover:  #B49ADE;
+      --shadow-sm:     0 2px 10px rgba(74,31,117,.09);
+      --shadow-md:     0 6px 28px rgba(74,31,117,.14);
+      --shadow-lg:     0 12px 48px rgba(74,31,117,.18);
+      --radius-sm:     10px;
+      --radius:        16px;
+      --radius-lg:     22px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ────────────────────────────────────────────
+       DELIVERY BANNER
+    ──────────────────────────────────────────── */
+    .top-banner {
+      background: linear-gradient(90deg, var(--green-dark) 0%, var(--green) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    /* ────────────────────────────────────────────
+       HEADER
+    ──────────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 300;
+      background: var(--purple-deep);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      box-shadow: 0 4px 24px rgba(0,0,0,.28);
+    }
+    .header-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 42px; height: 42px;
+      background: #fff;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,.2);
+    }
+    .logo-wordmark { line-height: 1; }
+    .logo-wordmark span:first-child {
+      display: block;
+      font-size: 24px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -.3px;
+    }
+    .logo-wordmark span:last-child {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .header-actions { display: flex; align-items: center; gap: 9px; }
+
+    .pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 15px;
+      border-radius: 50px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      border: 1.5px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.1);
+      color: #fff;
+      transition: background .18s, border-color .18s;
+    }
+    .pill:hover { background: rgba(255,255,255,.2); border-color: rgba(255,255,255,.4); }
+
+    /* ────────────────────────────────────────────
+       HERO — banner image + overlay text
+    ──────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    /* Gradient overlay so text is always legible */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(58,20,98,.82) 0%,
+        rgba(58,20,98,.55) 42%,
+        rgba(58,20,98,.15) 70%,
+        transparent 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 40px 36px;
+      max-width: 520px;
+    }
+    .hero-content h1 {
+      font-size: 36px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 12px rgba(0,0,0,.3);
+    }
+    .hero-content p {
+      font-size: 15px;
+      color: rgba(255,255,255,.85);
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+    .hero-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .hero-badge {
+      padding: 5px 13px;
+      border-radius: 50px;
+      background: rgba(255,255,255,.15);
+      border: 1.5px solid rgba(255,255,255,.3);
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ────────────────────────────────────────────
+       MAIN LAYOUT
+    ──────────────────────────────────────────── */
+    .main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 28px 18px 56px;
+    }
+
+    /* ────────────────────────────────────────────
+       SECTION CARDS
+    ──────────────────────────────────────────── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 22px 20px 20px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-bottom: 18px;
+    }
+    .card-icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-sm);
+      display: grid;
+      place-items: center;
+      font-size: 19px;
+      flex-shrink: 0;
+    }
+    .card-title    { font-size: 17px; font-weight: 900; color: var(--purple-dark); }
+    .card-subtitle { font-size: 12px; color: var(--muted); font-weight: 700; margin-top: 2px; text-transform: uppercase; letter-spacing: .4px; }
+    .card-badge {
+      margin-left: auto;
+      background: var(--green-pale);
+      color: var(--green-dark);
+      border: 1.5px solid var(--green);
+      border-radius: 50px;
+      padding: 4px 13px;
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    /* ────────────────────────────────────────────
+       SIZE GRID
+    ──────────────────────────────────────────── */
+    .size-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 560px) { .size-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .size-card {
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 10px 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .18s, background .18s, transform .14s, box-shadow .18s;
+      position: relative;
+      background: #fff;
+    }
+    .size-card:hover {
+      border-color: var(--purple-light);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+    }
+    .size-card.active {
+      border-color: var(--purple);
+      background: var(--purple-pale);
+      box-shadow: 0 0 0 3px rgba(107,53,160,.12);
+    }
+    .size-card.active::after {
+      content: '✓';
+      position: absolute;
+      top: 6px; right: 8px;
+      width: 19px; height: 19px;
+      background: var(--purple);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 19px;
+      text-align: center;
+    }
+    .size-emoji  { font-size: 28px; margin-bottom: 7px; }
+    .size-ml     { font-size: 17px; font-weight: 900; color: var(--purple); }
+    .size-price  { font-size: 15px; font-weight: 800; color: var(--green-dark); margin-top: 4px; }
+
+    /* ────────────────────────────────────────────
+       ITEM CHIPS
+    ──────────────────────────────────────────── */
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+      gap: 8px;
+    }
+    @media (max-width: 400px) { .item-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .item-chip {
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 11px 9px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      background: #fff;
+      transition: border-color .15s, background .15s, transform .12s;
+      position: relative;
+    }
+    .item-chip:hover:not(.locked) {
+      border-color: var(--border-hover);
+      background: var(--purple-pale);
+      transform: translateY(-2px);
+    }
+    .item-chip.active {
+      border-color: var(--purple);
+      background: var(--purple-pale);
+      box-shadow: 0 0 0 3px rgba(107,53,160,.1);
+    }
+    .item-chip.active::after {
+      content: '✓';
+      position: absolute;
+      top: 5px; right: 7px;
+      font-size: 10px;
+      color: var(--purple);
+      font-weight: 900;
+    }
+    .item-chip.locked:not(.active) { opacity: .35; cursor: not-allowed; }
+    .chip-name  { font-size: 12.5px; font-weight: 800; color: var(--text); }
+    .chip-price { font-size: 11.5px; font-weight: 800; color: var(--green-dark); margin-top: 4px; }
+    .chip-free  { font-size: 11px;   font-weight: 700; color: var(--green-dark); margin-top: 4px; opacity: .8; }
+
+    /* ────────────────────────────────────────────
+       DELIVERY TOGGLE
+    ──────────────────────────────────────────── */
+    .delivery-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 400px) { .delivery-row { grid-template-columns: 1fr; } }
+
+    .delivery-opt {
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 12px;
+      text-align: center;
+      cursor: pointer;
+      background: #fff;
+      transition: border-color .18s, background .18s, transform .14s;
+    }
+    .delivery-opt:hover  { border-color: var(--border-hover); transform: translateY(-2px); }
+    .delivery-opt.active { border-color: var(--purple); background: var(--purple-pale); box-shadow: 0 0 0 3px rgba(107,53,160,.1); }
+    .opt-icon   { font-size: 26px; margin-bottom: 6px; }
+    .opt-label  { font-size: 15px; font-weight: 900; color: var(--purple-dark); }
+    .opt-detail { font-size: 12px; color: var(--muted); margin-top: 3px; font-weight: 700; }
+
+    .address-wrap { margin-top: 13px; }
+    .address-input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      color: var(--text);
+      background: #fff;
+      transition: border-color .18s, box-shadow .18s;
+    }
+    .address-input:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(107,53,160,.1);
+    }
+    .address-input::placeholder { color: var(--muted); }
+
+    /* ────────────────────────────────────────────
+       ORDER SUMMARY
+    ──────────────────────────────────────────── */
+    .summary-card {
+      border-radius: var(--radius);
+      padding: 22px 22px 18px;
+      margin-bottom: 14px;
+      background: var(--purple-dark);
+      background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple) 100%);
+      box-shadow: var(--shadow-lg);
+      color: #fff;
+    }
+    .summary-title {
+      font-size: 17px;
+      font-weight: 900;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: .2px;
+    }
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 5px 0;
+      font-size: 13.5px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      gap: 10px;
+    }
+    .summary-line span:first-child { flex: 1; opacity: .88; }
+    .summary-line span:last-child  { font-weight: 800; white-space: nowrap; }
+    .discount-line span { color: #A8E083 !important; opacity: 1 !important; }
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-top: 14px;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -.3px;
+    }
+
+    /* ────────────────────────────────────────────
+       ORDER BUTTON
+    ──────────────────────────────────────────── */
+    .order-btn {
+      width: 100%;
+      padding: 17px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 17px;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+      cursor: pointer;
+      letter-spacing: .3px;
+      transition: transform .15s, box-shadow .18s, opacity .15s;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(91,168,74,.3);
+    }
+    .order-btn:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(91,168,74,.45);
+    }
+    .order-btn:active:not(:disabled) { transform: translateY(-1px); }
+    .order-btn:disabled { opacity: .38; cursor: not-allowed; box-shadow: none; }
+
+    /* ────────────────────────────────────────────
+       LOYALTY CARD
+    ──────────────────────────────────────────── */
+    .loyalty-card {
+      border-radius: var(--radius-lg);
+      padding: 26px 24px 22px;
+      margin-bottom: 16px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--purple-deep) 0%, #5C2890 55%, var(--purple-light) 100%);
+      box-shadow: var(--shadow-lg);
+    }
+    /* decorative circles */
+    .loyalty-card::before, .loyalty-card::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .loyalty-card::before { width: 240px; height: 240px; top: -80px; right: -60px; background: rgba(255,255,255,.06); }
+    .loyalty-card::after  { width: 180px; height: 180px; bottom: -70px; left: -40px; background: rgba(255,255,255,.05); }
+
+    .loyalty-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 4px;
+      opacity: .9;
+    }
+    .loyalty-heading { font-size: 22px; font-weight: 900; margin-bottom: 3px; }
+    .loyalty-sub     { font-size: 13px; opacity: .78; margin-bottom: 22px; font-weight: 600; }
+
+    .progress-track { background: rgba(255,255,255,.18); border-radius: 50px; height: 10px; overflow: hidden; margin-bottom: 7px; }
+    .progress-fill  { height: 100%; border-radius: 50px; background: linear-gradient(90deg, var(--green) 0%, #C5F078 100%); transition: width .5s ease; }
+    .progress-labels { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; opacity: .78; }
+
+    .loyalty-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px; }
+    .stat-box {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 12px;
+      padding: 13px 8px;
+      text-align: center;
+    }
+    .stat-value { font-size: 19px; font-weight: 900; }
+    .stat-label { font-size: 10px; opacity: .72; margin-top: 3px; text-transform: uppercase; letter-spacing: .5px; font-weight: 700; }
+
+    .reset-btn {
+      margin-top: 14px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.7);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 11px;
+      cursor: pointer;
+      letter-spacing: .3px;
+      transition: background .15s, color .15s;
+    }
+    .reset-btn:hover { background: rgba(255,255,255,.18); color: #fff; }
+
+    /* ────────────────────────────────────────────
+       CONTACT SECTION
+    ──────────────────────────────────────────── */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 11px; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px;
+      background: var(--purple-pale);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      transition: background .18s, border-color .18s, transform .14s, box-shadow .18s;
+    }
+    .contact-link:hover {
+      background: #EAE0FF;
+      border-color: var(--purple-light);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-icon  { width: 42px; height: 42px; border-radius: 9px; display: grid; place-items: center; font-size: 22px; flex-shrink: 0; }
+    .contact-name  { font-size: 14px; font-weight: 900; color: var(--purple-dark); }
+    .contact-value { font-size: 12.5px; color: var(--muted); font-weight: 700; margin-top: 2px; }
+
+    /* ────────────────────────────────────────────
+       FOOTER
+    ──────────────────────────────────────────── */
+    footer {
+      background: var(--purple-deep);
+      color: rgba(255,255,255,.65);
+      text-align: center;
+      padding: 22px 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    footer a { color: var(--blue); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ────────────────────────────────────────────
+       TOAST
+    ──────────────────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 26px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--purple-dark);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 14px;
+      box-shadow: 0 8px 36px rgba(0,0,0,.25);
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+      z-index: 1000;
+      white-space: nowrap;
+      pointer-events: none;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ────────────────────────────────────────────
+       RESPONSIVE
+    ──────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .hero { height: 260px; }
+      .hero-content h1 { font-size: 26px; }
+      .hero-content { padding: 0 22px 26px; }
+    }
+    @media (max-width: 400px) {
+      .loyalty-stats { grid-template-columns: repeat(3,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BANNER -->
+<div class="top-banner" id="banner">🛵 FRETE GRÁTIS para pedidos acima de R$30,00!</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#">
+      <div class="logo-mark">🍇</div>
+      <div class="logo-wordmark">
+        <span>gelou</span>
+        <span>açaí</span>
+      </div>
+    </a>
+    <div class="header-actions">
+      <div class="pill" onclick="scrollToLoyalty()">
+        ⭐ <span id="headerPts">0</span> pts
+      </div>
+      <button class="pill" onclick="toggleLang()" id="langBtn">🇺🇸 EN</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero-img" src="hero-banner.png" alt="Gelou Açaí" />
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 id="heroTitle">O Melhor Açaí de BJ! 🍇</h1>
+    <p id="heroSub">Monte seu açaí do jeito que você ama</p>
+    <div class="hero-badges">
+      <span class="hero-badge" id="badge1">📱 Peça pelo WhatsApp</span>
+      <span class="hero-badge" id="badge2">🎁 Até 4 complementos grátis</span>
+      <span class="hero-badge" id="badge3">⭐ Programa de fidelidade</span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- STEP 1: SIZE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:var(--purple-pale);">🥤</div>
+      <div>
+        <div class="card-title"  id="step1title">1. Escolha o Tamanho</div>
+        <div class="card-subtitle" id="step1sub">Selecione um tamanho para começar</div>
+      </div>
+    </div>
+    <div class="size-grid">
+      <div class="size-card" onclick="selectSize(this,300,15)">
+        <div class="size-emoji">🥤</div>
+        <div class="size-ml">300 ml</div>
+        <div class="size-price">R$15,00</div>
+      </div>
+      <div class="size-card" onclick="selectSize(this,500,18)">
+        <div class="size-emoji">🥤</div>
+        <div class="size-ml">500 ml</div>
+        <div class="size-price">R$18,00</div>
+      </div>
+      <div class="size-card" onclick="selectSize(this,700,21)">
+        <div class="size-emoji">🥤</div>
+        <div class="size-ml">700 ml</div>
+        <div class="size-price">R$21,00</div>
+      </div>
+      <div class="size-card" onclick="selectSize(this,1000,28)">
+        <div class="size-emoji">🧴</div>
+        <div class="size-ml">1 Litro</div>
+        <div class="size-price">R$28,00</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: TOPPINGS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:var(--blue-pale);">🌾</div>
+      <div style="flex:1">
+        <div class="card-title" id="step2title">2. Acompanhamentos</div>
+        <div class="card-subtitle" id="step2sub">Grátis — escolha até 4</div>
+      </div>
+      <div class="card-badge"><span id="toppingCount">0</span>/4</div>
+    </div>
+    <div class="item-grid" id="toppingGrid"></div>
+  </div>
+
+  <!-- STEP 3: SYRUPS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:#FFF3E0;">🍫</div>
+      <div>
+        <div class="card-title" id="step3title">3. Caldas</div>
+        <div class="card-subtitle" id="step3sub">Grátis — escolha à vontade</div>
+      </div>
+    </div>
+    <div class="item-grid" id="syrupGrid"></div>
+  </div>
+
+  <!-- STEP 4: FRUITS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:#FFF0F5;">🍓</div>
+      <div>
+        <div class="card-title" id="step4title">4. Frutas</div>
+        <div class="card-subtitle" id="step4sub">Adicionais pagos</div>
+      </div>
+    </div>
+    <div class="item-grid" id="fruitGrid"></div>
+  </div>
+
+  <!-- STEP 5: EXTRAS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:var(--green-pale);">🍬</div>
+      <div>
+        <div class="card-title" id="step5title">5. Adicionais</div>
+        <div class="card-subtitle" id="step5sub">Adicionais pagos</div>
+      </div>
+    </div>
+    <div class="item-grid" id="extraGrid"></div>
+  </div>
+
+  <!-- STEP 6: DELIVERY -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:var(--purple-pale);">🛵</div>
+      <div>
+        <div class="card-title" id="step6title">6. Entrega ou Retirada?</div>
+        <div class="card-subtitle" id="step6sub">Frete grátis para pedidos acima de R$30</div>
+      </div>
+    </div>
+    <div class="delivery-row">
+      <div class="delivery-opt active" id="optDelivery" onclick="setDelivery(true)">
+        <div class="opt-icon">🛵</div>
+        <div class="opt-label" id="delivLabel">Entrega</div>
+        <div class="opt-detail" id="delivDetail">+ R$2,00</div>
+      </div>
+      <div class="delivery-opt" id="optPickup" onclick="setDelivery(false)">
+        <div class="opt-icon">🏪</div>
+        <div class="opt-label" id="pickupLabel">Retirada</div>
+        <div class="opt-detail" id="pickupDetail">No estabelecimento</div>
+      </div>
+    </div>
+    <div class="address-wrap" id="addressWrap">
+      <input class="address-input" id="addressInput" type="text"
+             placeholder="Informe seu endereço para entrega..." />
+    </div>
+  </div>
+
+  <!-- ORDER SUMMARY -->
+  <div class="summary-card">
+    <div class="summary-title">🛒 <span id="summaryTitle">Resumo do Pedido</span></div>
+    <div id="summaryLines"></div>
+    <div class="summary-total">
+      <span id="totalLabel">Total</span>
+      <span id="totalValue">R$0,00</span>
+    </div>
+  </div>
+
+  <!-- ORDER BUTTON -->
+  <button class="order-btn" id="orderBtn" disabled onclick="placeOrder()">
+    📱 <span id="orderBtnText">Fazer Pedido via WhatsApp</span>
+  </button>
+
+  <!-- LOYALTY CARD -->
+  <div class="loyalty-card" id="loyaltySection">
+    <div class="loyalty-label" id="loyaltyLabel">Programa de Fidelidade</div>
+    <div class="loyalty-heading" id="loyaltyTitle">⭐ Cartão de Fidelidade</div>
+    <div class="loyalty-sub" id="loyaltySub">A cada R$100 em compras, ganhe R$10 de desconto!</div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="progress-labels">
+      <span>R$0</span>
+      <span id="progressLabel">R$0 / R$100</span>
+      <span>R$100</span>
+    </div>
+    <div class="loyalty-stats">
+      <div class="stat-box">
+        <div class="stat-value" id="statSpent">R$0</div>
+        <div class="stat-label" id="statSpentLabel">Total Gasto</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value" id="statDiscount">R$0</div>
+        <div class="stat-label" id="statDiscountLabel">Desconto</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value" id="statOrders">0</div>
+        <div class="stat-label" id="statOrdersLabel">Pedidos</div>
+      </div>
+    </div>
+    <button class="reset-btn" onclick="resetLoyalty()" id="resetBtn">Resetar dados (debug)</button>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:var(--purple-pale);">📞</div>
+      <div>
+        <div class="card-title" id="contactTitle">Fale Conosco</div>
+        <div class="card-subtitle" id="contactSub">Estamos aqui para você</div>
+      </div>
+    </div>
+    <div class="contact-grid">
+      <a class="contact-link" href="https://wa.me/5522999585490" target="_blank" rel="noopener">
+        <div class="contact-icon" style="background:#E8F5E9;">📱</div>
+        <div>
+          <div class="contact-name">WhatsApp</div>
+          <div class="contact-value">(22) 99958-5490</div>
+        </div>
+      </a>
+      <a class="contact-link" href="https://instagram.com/geloubji" target="_blank" rel="noopener">
+        <div class="contact-icon" style="background:#FCE4EC;">📸</div>
+        <div>
+          <div class="contact-name">Instagram</div>
+          <div class="contact-value">@geloubji</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Gelou Açaí &nbsp;·&nbsp; Feito com 💜 &nbsp;·&nbsp;
+    <a href="https://wa.me/5522999585490">(22) 99958-5490</a>
+    &nbsp;·&nbsp;
+    <a href="https://instagram.com/geloubji">@geloubji</a>
+  </p>
+  <p id="footerRights" style="margin-top:5px;font-size:11px;opacity:.5;">Todos os direitos reservados</p>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ══════════════════════════════════════════
+   DATA
+══════════════════════════════════════════ */
+const TOPPINGS = [
+  {id:'pacoca',    pt:'Paçoca',       en:'Paçoca'},
+  {id:'leite_po',  pt:'Leite em Pó',  en:'Powdered Milk'},
+  {id:'granola',   pt:'Granola',      en:'Granola'},
+  {id:'chocoball', pt:'Chocoball',    en:'Chocoball'},
+  {id:'sucrilhos', pt:'Sucrilhos',    en:'Corn Flakes'},
+  {id:'granulado', pt:'Granulado',    en:'Sprinkles'},
+  {id:'confetti',  pt:'Confetti',     en:'Confetti'},
+  {id:'amendoim',  pt:'Amendoim',     en:'Peanuts'},
+];
+const SYRUPS = [
+  {id:'leite_cond', pt:'Leite Condensado', en:'Condensed Milk'},
+  {id:'chocolate',  pt:'Chocolate',        en:'Chocolate'},
+  {id:'morango_s',  pt:'Morango',          en:'Strawberry'},
+];
+const FRUITS = [
+  {id:'morango',   pt:'Morango',   en:'Strawberry',  price:3},
+  {id:'banana',    pt:'Banana',    en:'Banana',       price:2},
+  {id:'uva_verde', pt:'Uva Verde', en:'Green Grapes', price:2},
+];
+const EXTRAS = [
+  {id:'gotas',      pt:'Gotas Choco', en:'Choco Chips', price:1},
+  {id:'ovomaltine', pt:'Ovomaltine',  en:'Ovomaltine',  price:2},
+  {id:'nutella',    pt:'Nutella',     en:'Nutella',      price:5},
+  {id:'kitkat',     pt:'KitKat',      en:'KitKat',       price:4},
+  {id:'baton',      pt:'Baton',       en:'Baton',        price:3},
+  {id:'oreo',       pt:'Oreo',        en:'Oreo',         price:3},
+  {id:'bis',        pt:'Bis',         en:'Bis',          price:2},
+];
+
+/* ══════════════════════════════════════════
+   STATE
+══════════════════════════════════════════ */
+const st = {
+  lang:'pt', sizeMl:null, sizePrice:0,
+  toppings:new Set(), syrups:new Set(), fruits:new Set(), extras:new Set(),
+  delivery:true,
+};
+const loy = {
+  totalSpent:      parseFloat(localStorage.getItem('gelou_total_spent')      || '0'),
+  discountsEarned: parseInt(  localStorage.getItem('gelou_discounts_earned') || '0'),
+  discountsUsed:   parseInt(  localStorage.getItem('gelou_discounts_used')   || '0'),
+  orders:          parseInt(  localStorage.getItem('gelou_orders')           || '0'),
+};
+
+/* ══════════════════════════════════════════
+   TRANSLATIONS
+══════════════════════════════════════════ */
+const T = {
+  banner:           {pt:'🛵 FRETE GRÁTIS para pedidos acima de R$30,00!',       en:'🛵 FREE DELIVERY on orders above R$30.00!'},
+  heroTitle:        {pt:'O Melhor Açaí de BJ! 🍇',                              en:'The Best Açaí in BJ! 🍇'},
+  heroSub:          {pt:'Monte seu açaí do jeito que você ama',                  en:'Build your açaí the way you love it'},
+  badge1:           {pt:'📱 Peça pelo WhatsApp',                                 en:'📱 Order via WhatsApp'},
+  badge2:           {pt:'🎁 Até 4 complementos grátis',                         en:'🎁 Up to 4 free toppings'},
+  badge3:           {pt:'⭐ Programa de fidelidade',                              en:'⭐ Loyalty program'},
+  step1title:       {pt:'1. Escolha o Tamanho',                                  en:'1. Choose Your Size'},
+  step1sub:         {pt:'Selecione um tamanho para começar',                     en:'Select a size to get started'},
+  step2title:       {pt:'2. Acompanhamentos',                                    en:'2. Toppings'},
+  step2sub:         {pt:'Grátis — escolha até 4',                               en:'Free — choose up to 4'},
+  step3title:       {pt:'3. Caldas',                                             en:'3. Syrups'},
+  step3sub:         {pt:'Grátis — escolha à vontade',                           en:'Free — choose as many as you like'},
+  step4title:       {pt:'4. Frutas',                                             en:'4. Fruits'},
+  step4sub:         {pt:'Adicionais pagos',                                      en:'Paid extras'},
+  step5title:       {pt:'5. Adicionais',                                         en:'5. Extras'},
+  step5sub:         {pt:'Adicionais pagos',                                      en:'Paid extras'},
+  step6title:       {pt:'6. Entrega ou Retirada?',                              en:'6. Delivery or Pickup?'},
+  step6sub:         {pt:'Frete grátis para pedidos acima de R$30',              en:'Free delivery on orders above R$30'},
+  delivLabel:       {pt:'Entrega',                                               en:'Delivery'},
+  delivDetail:      {pt:'+ R$2,00',                                              en:'+ R$2.00'},
+  pickupLabel:      {pt:'Retirada',                                              en:'Pickup'},
+  pickupDetail:     {pt:'No estabelecimento',                                    en:'At the store'},
+  addrPlaceholder:  {pt:'Informe seu endereço para entrega...',                  en:'Enter your delivery address...'},
+  summaryTitle:     {pt:'Resumo do Pedido',                                      en:'Order Summary'},
+  totalLabel:       {pt:'Total',                                                 en:'Total'},
+  orderBtnText:     {pt:'Fazer Pedido via WhatsApp',                             en:'Order via WhatsApp'},
+  loyaltyLabel:     {pt:'Programa de Fidelidade',                               en:'Loyalty Program'},
+  loyaltyTitle:     {pt:'⭐ Cartão de Fidelidade',                               en:'⭐ Loyalty Card'},
+  loyaltySub:       {pt:'A cada R$100 em compras, ganhe R$10 de desconto!',      en:'Every R$100 spent, earn R$10 off!'},
+  statSpentLabel:   {pt:'Total Gasto',                                           en:'Total Spent'},
+  statDiscountLabel:{pt:'Desconto',                                              en:'Discount'},
+  statOrdersLabel:  {pt:'Pedidos',                                               en:'Orders'},
+  resetBtn:         {pt:'Resetar dados (debug)',                                 en:'Reset data (debug)'},
+  contactTitle:     {pt:'Fale Conosco',                                          en:'Contact Us'},
+  contactSub:       {pt:'Estamos aqui para você',                               en:'We are here for you'},
+  footerRights:     {pt:'Todos os direitos reservados',                          en:'All rights reserved'},
+  freeLabel:        {pt:'Grátis',                                                en:'Free'},
+  freeDelivery:     {pt:'🎉 Frete Grátis!',                                      en:'🎉 Free Delivery!'},
+  deliveryFee:      {pt:'Entrega',                                               en:'Delivery'},
+  loyaltyDisc:      {pt:'⭐ Desconto Fidelidade',                                en:'⭐ Loyalty Discount'},
+  toppingsLabel:    {pt:'Acompanhamentos',                                       en:'Toppings'},
+  syrupsLabel:      {pt:'Caldas',                                                en:'Syrups'},
+  toastMaxTopping:  {pt:'Máximo 4 acompanhamentos!',                            en:'Max 4 toppings!'},
+  toastNoAddr:      {pt:'Por favor, informe seu endereço!',                      en:'Please enter your address!'},
+  toastSuccess:     {pt:'✅ Pedido enviado via WhatsApp!',                        en:'✅ Order sent via WhatsApp!'},
+  toastReset:       {pt:'Dados resetados!',                                      en:'Data reset!'},
+  confirmReset:     {pt:'Resetar todos os dados de fidelidade?',                 en:'Reset all loyalty data?'},
+  chipFree:         {pt:'✓ grátis',                                              en:'✓ free'},
+  noItems:          {pt:'Nenhum item selecionado ainda.',                        en:'No items selected yet.'},
+};
+const t = k => T[k] ? T[k][st.lang] : k;
+const fmt = n => n < 0
+  ? `-R$${Math.abs(n).toFixed(2).replace('.',',')}`
+  : `R$${n.toFixed(2).replace('.',',')}`;
+
+/* ══════════════════════════════════════════
+   RENDER GRIDS
+══════════════════════════════════════════ */
+function renderToppingGrid() {
+  document.getElementById('toppingGrid').innerHTML = TOPPINGS.map(item => {
+    const sel  = st.toppings.has(item.id);
+    const lock = !sel && st.toppings.size >= 4;
+    return `<div class="item-chip${sel?' active':''}${lock?' locked':''}" onclick="toggleTopping('${item.id}')">
+              <div class="chip-name">${item[st.lang]}</div>
+              <div class="chip-free">${t('chipFree')}</div>
+            </div>`;
+  }).join('');
+}
+function renderSyrupGrid() {
+  document.getElementById('syrupGrid').innerHTML = SYRUPS.map(item => {
+    const sel = st.syrups.has(item.id);
+    return `<div class="item-chip${sel?' active':''}" onclick="toggleSyrup('${item.id}')">
+              <div class="chip-name">${item[st.lang]}</div>
+              <div class="chip-free">${t('chipFree')}</div>
+            </div>`;
+  }).join('');
+}
+function renderFruitGrid() {
+  document.getElementById('fruitGrid').innerHTML = FRUITS.map(item => {
+    const sel = st.fruits.has(item.id);
+    return `<div class="item-chip${sel?' active':''}" onclick="toggleFruit('${item.id}')">
+              <div class="chip-name">${item[st.lang]}</div>
+              <div class="chip-price">+${fmt(item.price)}</div>
+            </div>`;
+  }).join('');
+}
+function renderExtraGrid() {
+  document.getElementById('extraGrid').innerHTML = EXTRAS.map(item => {
+    const sel = st.extras.has(item.id);
+    return `<div class="item-chip${sel?' active':''}" onclick="toggleExtra('${item.id}')">
+              <div class="chip-name">${item[st.lang]}</div>
+              <div class="chip-price">+${fmt(item.price)}</div>
+            </div>`;
+  }).join('');
+}
+
+/* ══════════════════════════════════════════
+   INTERACTIONS
+══════════════════════════════════════════ */
+function selectSize(el, ml, price) {
+  document.querySelectorAll('.size-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  st.sizeMl = ml; st.sizePrice = price;
+  document.getElementById('orderBtn').disabled = false;
+  updateSummary();
+}
+function toggleTopping(id) {
+  if (st.toppings.has(id)) { st.toppings.delete(id); }
+  else if (st.toppings.size < 4) { st.toppings.add(id); }
+  else { showToast(t('toastMaxTopping')); return; }
+  document.getElementById('toppingCount').textContent = st.toppings.size;
+  renderToppingGrid(); updateSummary();
+}
+function toggleSyrup(id)  { st.syrups.has(id) ? st.syrups.delete(id) : st.syrups.add(id); renderSyrupGrid(); updateSummary(); }
+function toggleFruit(id)  { st.fruits.has(id) ? st.fruits.delete(id) : st.fruits.add(id); renderFruitGrid(); updateSummary(); }
+function toggleExtra(id)  { st.extras.has(id) ? st.extras.delete(id) : st.extras.add(id); renderExtraGrid(); updateSummary(); }
+
+function setDelivery(val) {
+  st.delivery = val;
+  document.getElementById('optDelivery').classList.toggle('active',  val);
+  document.getElementById('optPickup').classList.toggle('active',   !val);
+  document.getElementById('addressWrap').style.display = val ? 'block' : 'none';
+  updateSummary();
+}
+
+/* ══════════════════════════════════════════
+   SUMMARY & TOTALS
+══════════════════════════════════════════ */
+function calcSubtotal() {
+  let s = st.sizePrice;
+  FRUITS.forEach(f => { if (st.fruits.has(f.id)) s += f.price; });
+  EXTRAS.forEach(e => { if (st.extras.has(e.id)) s += e.price; });
+  return s;
+}
+function availableDiscounts() { return loy.discountsEarned - loy.discountsUsed; }
+function calcTotal() {
+  let s = calcSubtotal();
+  if (st.delivery && s < 30) s += 2;
+  if (availableDiscounts() > 0) s = Math.max(0, s - 10);
+  return s;
+}
+
+function updateSummary() {
+  const lines = [];
+  const sub   = calcSubtotal();
+
+  if (st.sizeMl) {
+    lines.push({label:`Açaí ${st.sizeMl===1000?'1 Litro':st.sizeMl+'ml'}`, price:st.sizePrice});
+  }
+  if (st.toppings.size > 0) {
+    const names = [...st.toppings].map(id => TOPPINGS.find(x=>x.id===id)[st.lang]).join(', ');
+    lines.push({label:`${t('toppingsLabel')}: ${names}`, price:0, free:true});
+  }
+  if (st.syrups.size > 0) {
+    const names = [...st.syrups].map(id => SYRUPS.find(x=>x.id===id)[st.lang]).join(', ');
+    lines.push({label:`${t('syrupsLabel')}: ${names}`, price:0, free:true});
+  }
+  FRUITS.forEach(f => { if (st.fruits.has(f.id)) lines.push({label:f[st.lang], price:f.price}); });
+  EXTRAS.forEach(e => { if (st.extras.has(e.id)) lines.push({label:e[st.lang], price:e.price}); });
+
+  if (st.delivery) {
+    lines.push(sub >= 30
+      ? {label:t('freeDelivery'), price:0, free:true}
+      : {label:t('deliveryFee'), price:2});
+  }
+  if (availableDiscounts() > 0) {
+    lines.push({label:t('loyaltyDisc'), price:-10, discount:true});
+  }
+
+  const el = document.getElementById('summaryLines');
+  el.innerHTML = lines.length === 0
+    ? `<div class="summary-line" style="opacity:.45"><span>${t('noItems')}</span></div>`
+    : lines.map(l => {
+        const pStr = l.free ? t('freeLabel') : fmt(l.price);
+        return `<div class="summary-line${l.discount?' discount-line':''}">
+                  <span>${l.label}</span><span>${pStr}</span>
+                </div>`;
+      }).join('');
+
+  document.getElementById('totalValue').textContent = fmt(calcTotal());
+}
+
+/* ══════════════════════════════════════════
+   ORDER VIA WHATSAPP
+══════════════════════════════════════════ */
+function placeOrder() {
+  if (!st.sizeMl) return;
+  if (st.delivery && !document.getElementById('addressInput').value.trim()) {
+    showToast(t('toastNoAddr')); return;
+  }
+  let msg = '🍇 *PEDIDO GELOU AÇAÍ*\n\n';
+  msg += `📏 *Tamanho:* ${st.sizeMl===1000?'1 Litro':st.sizeMl+'ml'} — ${fmt(st.sizePrice)}\n`;
+  if (st.toppings.size > 0) {
+    msg += `🌾 *Acompanhamentos:* ${[...st.toppings].map(id=>TOPPINGS.find(x=>x.id===id).pt).join(', ')}\n`;
+  }
+  if (st.syrups.size > 0) {
+    msg += `🍫 *Caldas:* ${[...st.syrups].map(id=>SYRUPS.find(x=>x.id===id).pt).join(', ')}\n`;
+  }
+  FRUITS.forEach(f => { if (st.fruits.has(f.id)) msg += `🍓 *${f.pt}:* +${fmt(f.price)}\n`; });
+  EXTRAS.forEach(e => { if (st.extras.has(e.id)) msg += `🍬 *${e.pt}:* +${fmt(e.price)}\n`; });
+  msg += '\n';
+  if (st.delivery) {
+    const addr = document.getElementById('addressInput').value.trim();
+    const sub  = calcSubtotal();
+    msg += `🛵 *Entrega*\n📍 ${addr}\n`;
+    msg += sub >= 30 ? '✅ Frete grátis!\n' : '💳 Taxa: R$2,00\n';
+  } else {
+    msg += '🏪 *Retirada no estabelecimento*\n';
+  }
+  if (availableDiscounts() > 0) msg += `⭐ *Desconto fidelidade:* -R$10,00\n`;
+  msg += `\n💰 *TOTAL: ${fmt(calcTotal())}*`;
+
+  // Update loyalty
+  const spent = calcSubtotal() + (st.delivery && calcSubtotal() < 30 ? 2 : 0);
+  loy.totalSpent      += spent;
+  loy.discountsEarned  = Math.floor(loy.totalSpent / 100);
+  if (availableDiscounts() > 0) loy.discountsUsed++;
+  loy.orders++;
+  saveLoyalty(); updateLoyaltyUI();
+
+  window.open('https://wa.me/5522999585490?text=' + encodeURIComponent(msg), '_blank');
+  showToast(t('toastSuccess'));
+}
+
+/* ══════════════════════════════════════════
+   LOYALTY
+══════════════════════════════════════════ */
+function saveLoyalty() {
+  localStorage.setItem('gelou_total_spent',      loy.totalSpent.toString());
+  localStorage.setItem('gelou_discounts_earned', loy.discountsEarned.toString());
+  localStorage.setItem('gelou_discounts_used',   loy.discountsUsed.toString());
+  localStorage.setItem('gelou_orders',           loy.orders.toString());
+}
+function updateLoyaltyUI() {
+  const cycle = loy.totalSpent % 100;
+  document.getElementById('progressFill').style.width = Math.min((cycle/100)*100, 100) + '%';
+  document.getElementById('progressLabel').textContent = `R$${cycle.toFixed(0)} / R$100`;
+  document.getElementById('statSpent').textContent    = `R$${loy.totalSpent.toFixed(0)}`;
+  document.getElementById('statDiscount').textContent = `R$${(availableDiscounts()*10).toFixed(0)}`;
+  document.getElementById('statOrders').textContent   = loy.orders;
+  document.getElementById('headerPts').textContent    = Math.round(loy.totalSpent);
+  updateSummary();
+}
+function scrollToLoyalty() {
+  document.getElementById('loyaltySection').scrollIntoView({behavior:'smooth'});
+}
+function resetLoyalty() {
+  if (!confirm(t('confirmReset'))) return;
+  loy.totalSpent = loy.discountsEarned = loy.discountsUsed = loy.orders = 0;
+  saveLoyalty(); updateLoyaltyUI();
+  showToast(t('toastReset'));
+}
+
+/* ══════════════════════════════════════════
+   LANGUAGE TOGGLE
+══════════════════════════════════════════ */
+function applyLang() {
+  const ids = [
+    'banner','heroTitle','heroSub','badge1','badge2','badge3',
+    'step1title','step1sub','step2title','step2sub',
+    'step3title','step3sub','step4title','step4sub',
+    'step5title','step5sub','step6title','step6sub',
+    'delivLabel','delivDetail','pickupLabel','pickupDetail',
+    'summaryTitle','totalLabel','orderBtnText',
+    'loyaltyLabel','loyaltyTitle','loyaltySub',
+    'statSpentLabel','statDiscountLabel','statOrdersLabel',
+    'resetBtn','contactTitle','contactSub','footerRights',
+  ];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && T[id]) el.textContent = T[id][st.lang];
+  });
+  document.getElementById('addressInput').placeholder = t('addrPlaceholder');
+  document.getElementById('langBtn').textContent = st.lang === 'pt' ? '🇺🇸 EN' : '🇧🇷 PT';
+  renderToppingGrid(); renderSyrupGrid(); renderFruitGrid(); renderExtraGrid();
+  updateSummary();
+}
+function toggleLang() { st.lang = st.lang === 'pt' ? 'en' : 'pt'; applyLang(); }
+
+/* ══════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════ */
+let _toastTimer;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+}
+
+/* ══════════════════════════════════════════
+   BOOT
+══════════════════════════════════════════ */
+(function init() {
+  renderToppingGrid(); renderSyrupGrid(); renderFruitGrid(); renderExtraGrid();
+  updateSummary(); updateLoyaltyUI();
+  document.getElementById('addressWrap').style.display = 'block';
+})();
+</script>
+</body>
+</html>
