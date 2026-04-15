@@ -973,19 +973,24 @@ function placeOrder() {
   if (phone) msg += `📱 ${phone}\n`;
   msg += '\n';
 
-  cart.forEach((item) => {
-    msg += `*Açaí ${item.sizeMl===1000?'1 Litro':item.sizeMl+'ml'}* — ${fmt(itemTotal(item))}\n`;
+  cart.forEach((item, idx) => {
+    const label = item.sizeMl===1000?'1 Litro':item.sizeMl+'ml';
+    const prefix = cart.length > 1 ? ` #${idx+1}` : '';
+    msg += `🥤 *Açaí ${label}${prefix}*\n`;
+    msg += `  Tamanho: ${fmt(item.sizePrice)}\n`;
     if (item.toppings.length) msg += `  🌾 ${item.toppings.map(id=>TOPPINGS.find(x=>x.id===id)?.pt||id).join(', ')}\n`;
     if (item.syrups.length)   msg += `  🍫 ${item.syrups.map(id=>SYRUPS.find(x=>x.id===id)?.pt||id).join(', ')}\n`;
-    if (item.fruits.length)   msg += `  🍓 ${item.fruits.map(id=>{const f=FRUITS.find(x=>x.id===id);return f?`${f.pt} (+${fmt(f.price)})`:id;}).join(', ')}\n`;
-    if (item.extras.length)   msg += `  🍬 ${item.extras.map(id=>{const e=EXTRAS.find(x=>x.id===id);return e?`${e.pt} (+${fmt(e.price)})`:id;}).join(', ')}\n`;
-    msg += '\n';
+    item.fruits.forEach(id => { const f=FRUITS.find(x=>x.id===id); if(f) msg+=`  🍓 ${f.pt}: +${fmt(f.price)}\n`; });
+    item.extras.forEach(id => { const e=EXTRAS.find(x=>x.id===id); if(e) msg+=`  🍬 ${e.pt}: +${fmt(e.price)}\n`; });
+    msg += `  *Subtotal: ${fmt(itemTotal(item))}*\n\n`;
   });
 
-  msg += `🛵 *Entrega*\n📍 ${addr}\n`;
-  msg += sub >= 30 ? '✅ Entrega grátis!\n' : '💳 Taxa de entrega: R$2,00\n';
-  if (availableDiscounts() > 0) msg += `⭐ *Desconto fidelidade:* -R$10,00\n`;
-  msg += `\n💰 *TOTAL: ${fmt(total)}*\n`;
+  msg += `━━━━━━━━━━━━━━━━━━\n`;
+  msg += `🛵 Entrega: ${sub >= 30 ? 'Grátis ✅' : fmt(2)}\n`;
+  if (availableDiscounts() > 0) msg += `⭐ Desconto fidelidade: -${fmt(10)}\n`;
+  msg += `━━━━━━━━━━━━━━━━━━\n`;
+  msg += `💰 *TOTAL: ${fmt(total)}*\n`;
+  msg += `📍 ${addr}\n`;
 
   if (payMethod === 'pix') {
     msg += `\n💳 *Pagamento:* PIX`;
