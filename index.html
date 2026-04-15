@@ -43,7 +43,7 @@
     header { position:sticky; top:0; z-index:300; background:var(--purple-deep); }
     .header-inner { max-width:1200px; margin:0 auto; padding:8px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
     .logo { display:flex; align-items:center; text-decoration:none; }
-    .logo-img { height:68px; width:auto; display:block; background:#fff; border-radius:50%; padding:4px; }
+    .logo-img { height:56px; width:56px; display:block; background:#fff; border-radius:50%; padding:5px; object-fit:contain; flex-shrink:0; }
     .logo-text-group { display:none; }
     .header-right { display:flex; align-items:center; gap:8px; }
     .pill { display:flex; align-items:center; gap:5px; padding:7px 14px; border-radius:50px; font-family:inherit; font-size:12.5px; font-weight:800; cursor:pointer; border:1.5px solid rgba(255,255,255,.18); background:rgba(255,255,255,.07); color:rgba(255,255,255,.92); transition:background .15s,border-color .15s; white-space:nowrap; }
@@ -51,7 +51,7 @@
 
     /* ── HERO ── */
     .hero { background:linear-gradient(150deg, var(--purple-deep) 0%, #4A1F75 50%, #5C2A8A 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:36px 24px 32px; text-align:center; }
-    .hero-logo { width:280px; max-width:78vw; height:auto; display:block; margin:0 auto 20px; background:#fff; border-radius:50%; padding:16px; }
+    .hero-logo { width:220px; height:220px; max-width:70vw; max-height:70vw; display:block; margin:0 auto 20px; background:#fff; border-radius:50%; padding:18px; object-fit:contain; }
     .hero-overlay { display:none; }
     .hero-img { display:none; }
     .hero-content { width:100%; }
@@ -222,7 +222,7 @@
       .pill { padding:8px 16px; font-size:13px; }
 
       .hero { padding:52px 24px 44px; }
-      .hero-logo { width:340px; margin-bottom:22px; }
+      .hero-logo { width:260px; height:260px; margin-bottom:22px; padding:20px; }
       .hero-content h1 { font-size:24px; }
 
       .main { padding:28px 32px 72px; }
