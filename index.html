@@ -47,20 +47,21 @@
     header { position:sticky; top:0; z-index:300; background:var(--purple-deep); box-shadow:0 4px 24px rgba(0,0,0,.28); }
     .header-inner { max-width:1200px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
     .logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
-    .logo-img { height:48px; width:auto; border-radius:10px; flex-shrink:0; box-shadow:0 2px 12px rgba(0,0,0,.25); }
+    .logo-img { height:72px; width:auto; border-radius:10px; flex-shrink:0; mix-blend-mode:multiply; }
     .logo-text-group { display:none; }
     .header-right { display:flex; align-items:center; gap:6px; }
     .pill { display:flex; align-items:center; gap:4px; padding:7px 12px; border-radius:50px; font-family:inherit; font-size:12px; font-weight:800; cursor:pointer; border:1.5px solid rgba(255,255,255,.2); background:rgba(255,255,255,.08); color:#fff; transition:background .18s; white-space:nowrap; }
     .pill:hover { background:rgba(255,255,255,.18); }
 
     /* ── HERO ── */
-    .hero { position:relative; height:220px; overflow:hidden; display:flex; align-items:flex-end; }
-    .hero-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 30%; }
-    .hero-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(58,20,98,.92) 0%, rgba(58,20,98,.6) 50%, rgba(58,20,98,.2) 100%); }
-    .hero-content { position:relative; z-index:2; padding:0 20px 20px; width:100%; }
-    .hero-content h1 { font-size:24px; font-weight:900; color:#fff; line-height:1.15; margin-bottom:6px; }
+    .hero { position:relative; min-height:260px; overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(160deg, #4A1F75 0%, #6B35A0 60%, #3A1462 100%); padding:28px 20px 24px; }
+    .hero-logo { width:260px; max-width:80vw; height:auto; mix-blend-mode:multiply; display:block; margin:0 auto 10px; filter:drop-shadow(0 8px 32px rgba(0,0,0,.35)); }
+    .hero-overlay { display:none; }
+    .hero-img { display:none; }
+    .hero-content { position:relative; z-index:2; padding:0; width:100%; text-align:center; }
+    .hero-content h1 { font-size:22px; font-weight:900; color:#fff; line-height:1.15; margin-bottom:6px; }
     .hero-content p  { font-size:13px; color:rgba(255,255,255,.82); margin-bottom:10px; font-weight:600; }
-    .hero-badges { display:flex; gap:6px; flex-wrap:wrap; }
+    .hero-badges { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; }
     .hero-badge { padding:4px 10px; border-radius:50px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); font-size:10.5px; font-weight:700; color:#fff; backdrop-filter:blur(4px); }
 
     /* ── MAIN LAYOUT ── */
@@ -238,15 +239,14 @@
     ══════════════════════════════════ */
     @media (min-width:860px) {
       .header-inner { padding:12px 28px; }
-      .logo-img { height:54px; }
+      .logo-img { height:90px; }
       .logo-name { font-size:26px; }
       .logo-sub { font-size:10px; letter-spacing:4px; }
       .pill { padding:8px 16px; font-size:13px; }
 
-      .hero { height:340px; }
-      .hero-overlay { background:linear-gradient(to right, rgba(58,20,98,.88) 0%, rgba(58,20,98,.5) 40%, transparent 70%); }
-      .hero-content { max-width:540px; padding:0 48px 40px; }
-      .hero-content h1 { font-size:38px; }
+      .hero { min-height:400px; padding:36px 20px 30px; }
+      .hero-logo { width:380px; margin-bottom:16px; }
+      .hero-content h1 { font-size:30px; }
       .hero-content p { font-size:15px; }
       .hero-badges { gap:8px; }
       .hero-badge { font-size:12px; padding:6px 14px; }
@@ -318,7 +318,7 @@
 </header>
 
 <section class="hero">
-  <img class="hero-img" src="hero-banner.png" alt="Gelou Açaí" />
+  <img class="hero-logo" src="logo.jpg" alt="Gelou Açaí Logo" />
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <h1 id="heroTitle">Monte seu Açaí! 🍇</h1>
@@ -783,7 +783,7 @@ function toggleTopping(id) {
   document.getElementById('toppingCount').textContent = cur.toppings.size;
   renderToppingGrid();
 }
-function toggleSyrup(id)  { cur.syrups.has(id) ? cur.syrups.delete(id) : cur.syrups.add(id); renderSyrupGrid(); }
+function toggleSyrup(id)  { if (cur.syrups.has(id)) { cur.syrups.delete(id); } else { cur.syrups.clear(); cur.syrups.add(id); } renderSyrupGrid(); }
 function toggleFruit(id)  { cur.fruits.has(id) ? cur.fruits.delete(id) : cur.fruits.add(id); renderFruitGrid(); }
 function toggleExtra(id)  { cur.extras.has(id) ? cur.extras.delete(id) : cur.extras.add(id); renderExtraGrid(); }
 
