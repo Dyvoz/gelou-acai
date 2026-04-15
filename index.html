@@ -136,6 +136,19 @@
     .summary-total { display:flex; justify-content:space-between; align-items:baseline; padding-top:14px; font-size:22px; font-weight:900; }
 
     /* ── ORDER BUTTON ── */
+    /* ── PAYMENT ── */
+    .payment-toggle { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px; }
+    .pay-btn { padding:12px 8px; border:1.5px solid var(--border); border-radius:10px; font-family:inherit; font-size:13px; font-weight:800; color:var(--text-mid); background:#fff; cursor:pointer; transition:border-color .14s,background .14s,color .14s; display:flex; align-items:center; justify-content:center; gap:6px; -webkit-tap-highlight-color:transparent; }
+    .pay-btn:hover { border-color:var(--border-h); background:var(--purple-pale); }
+    .pay-btn.active { border-color:var(--purple); background:var(--purple-pale); color:var(--purple-dark); }
+    .cash-row { display:none; margin-bottom:10px; }
+    .cash-row.show { display:block; }
+    .cash-presets { display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; }
+    .cash-preset { padding:5px 12px; border:1.5px solid var(--border); border-radius:50px; font-family:inherit; font-size:12px; font-weight:800; color:var(--text-mid); background:#fff; cursor:pointer; transition:border-color .13s,background .13s,color .13s; -webkit-tap-highlight-color:transparent; }
+    .cash-preset:hover { border-color:var(--border-h); background:var(--purple-pale); }
+    .cash-preset.active { border-color:var(--purple); background:var(--purple-pale); color:var(--purple-dark); }
+
+    /* ── ORDER BUTTON ── */
     .order-btn { width:100%; padding:16px; border:none; border-radius:var(--r-sm); font-family:inherit; font-size:15px; font-weight:900; color:#fff; background:var(--green-dark); cursor:pointer; transition:transform .13s,box-shadow .15s,opacity .13s; box-shadow:0 4px 18px rgba(91,168,74,.28); letter-spacing:.1px; -webkit-tap-highlight-color:transparent; }
     .order-btn:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 8px 28px rgba(91,168,74,.4); background:var(--green); }
     .order-btn:active:not(:disabled) { transform:scale(.98); }
@@ -439,6 +452,26 @@
         </div>
       </div>
 
+      <!-- PAYMENT METHOD -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon" style="background:var(--green-pale)">💳</div>
+          <div>
+            <div class="card-title" id="payTitle">Forma de Pagamento</div>
+            <div class="card-subtitle" id="paySubtitle">Como você vai pagar?</div>
+          </div>
+        </div>
+        <div class="payment-toggle">
+          <button class="pay-btn" id="payPix"  onclick="selectPayment('pix')">  🏦 <span id="payPixLabel">PIX</span></button>
+          <button class="pay-btn" id="payCash" onclick="selectPayment('cash')"> 💵 <span id="payCashLabel">Dinheiro</span></button>
+        </div>
+        <div class="cash-row" id="cashRow">
+          <div class="field-label" id="cashLabel">Vai pagar com quanto?</div>
+          <input class="field-input" id="cashAmount" type="number" min="0" step="5" placeholder="Ex: 50" oninput="onCashInput()" />
+          <div class="cash-presets" id="cashPresets"></div>
+        </div>
+      </div>
+
       <!-- ORDER BUTTON -->
       <button class="order-btn" id="orderBtn" disabled onclick="placeOrder()">
         📱 <span id="orderBtnText">Fazer Pedido via WhatsApp</span>
@@ -584,6 +617,8 @@ const cur = {
 };
 
 let cart = [];
+let payMethod = null; // 'pix' | 'cash'
+const CASH_PRESETS = [20, 50, 100, 200];
 
 const loy = {
   totalSpent:      parseFloat(localStorage.getItem('gelou_total_spent')      || '0'),
@@ -655,7 +690,14 @@ const T = {
   toastNeedSize:    {pt:'Escolha um tamanho!',                                      en:'Please choose a size!'},
   toastNeedCart:    {pt:'Adicione pelo menos um açaí ao carrinho!',                en:'Add at least one açaí to the cart!'},
   toastNeedAddr:    {pt:'Informe seu endereço de entrega!',                        en:'Please enter your delivery address!'},
+  toastNeedPay:     {pt:'Escolha a forma de pagamento!',                           en:'Please choose a payment method!'},
+  toastNeedCash:    {pt:'Informe o valor em dinheiro!',                            en:'Please enter the cash amount!'},
   toastSuccess:     {pt:'✅ Pedido enviado via WhatsApp!',                           en:'✅ Order sent via WhatsApp!'},
+  payTitle:         {pt:'Forma de Pagamento',                                      en:'Payment Method'},
+  paySubtitle:      {pt:'Como você vai pagar?',                                    en:'How will you pay?'},
+  payPixLabel:      {pt:'PIX',                                                     en:'PIX'},
+  payCashLabel:     {pt:'Dinheiro',                                                en:'Cash'},
+  cashLabel:        {pt:'Vai pagar com quanto?',                                   en:'Paying with how much?'},
   toastReset:       {pt:'Dados resetados!',                                         en:'Data reset!'},
   confirmReset:     {pt:'Resetar todos os dados de fidelidade?',                   en:'Reset all loyalty data?'},
   statusSent:       {pt:'Enviado',                                                  en:'Sent'},
@@ -879,14 +921,52 @@ function loadUser() {
 ══════════════════════════════════ */
 let _pendingOrder = null;
 
+/* ══════════════════════════════════
+   PAYMENT
+══════════════════════════════════ */
+function selectPayment(method) {
+  payMethod = method;
+  document.getElementById('payPix').classList.toggle('active',  method === 'pix');
+  document.getElementById('payCash').classList.toggle('active', method === 'cash');
+  const cashRow = document.getElementById('cashRow');
+  cashRow.classList.toggle('show', method === 'cash');
+  if (method === 'cash') renderCashPresets();
+  updateSummary();
+}
+
+function renderCashPresets() {
+  const total = calcTotal();
+  const selected = parseFloat(document.getElementById('cashAmount').value) || 0;
+  // Build preset values: total rounded up to nearest 5/10 + common bills
+  const rounded = Math.ceil(total / 5) * 5;
+  const presets = [...new Set([rounded, ...CASH_PRESETS].filter(v => v >= total))].sort((a,b)=>a-b).slice(0,5);
+  document.getElementById('cashPresets').innerHTML = presets.map(v =>
+    `<button class="cash-preset${selected===v?' active':''}" onclick="setCashPreset(${v})">${fmt(v)}</button>`
+  ).join('');
+}
+
+function setCashPreset(val) {
+  document.getElementById('cashAmount').value = val;
+  renderCashPresets();
+}
+
+function onCashInput() {
+  renderCashPresets();
+}
+
 function placeOrder() {
   if (cart.length === 0) { showToast(t('toastNeedCart')); return; }
   const addr = document.getElementById('userAddress').value.trim();
   if (!addr) { showToast(t('toastNeedAddr')); return; }
+  if (!payMethod) { showToast(t('toastNeedPay')); return; }
+
+  const cashAmt = parseFloat(document.getElementById('cashAmount').value) || 0;
+  if (payMethod === 'cash' && cashAmt <= 0) { showToast(t('toastNeedCash')); return; }
 
   const name  = document.getElementById('userName').value.trim();
   const phone = document.getElementById('userPhone').value.trim();
   const sub   = cartSubtotal();
+  const total = calcTotal();
 
   let msg = `🍇 *PEDIDO GELOU AÇAÍ*\n`;
   if (name)  msg += `👤 *${name}*\n`;
@@ -905,7 +985,15 @@ function placeOrder() {
   msg += `🛵 *Entrega*\n📍 ${addr}\n`;
   msg += sub >= 30 ? '✅ Entrega grátis!\n' : '💳 Taxa de entrega: R$2,00\n';
   if (availableDiscounts() > 0) msg += `⭐ *Desconto fidelidade:* -R$10,00\n`;
-  msg += `\n💰 *TOTAL: ${fmt(calcTotal())}*`;
+  msg += `\n💰 *TOTAL: ${fmt(total)}*\n`;
+
+  if (payMethod === 'pix') {
+    msg += `\n💳 *Pagamento:* PIX`;
+  } else {
+    const change = cashAmt - total;
+    msg += `\n💵 *Pagamento:* Dinheiro — vai pagar com ${fmt(cashAmt)}`;
+    if (change > 0) msg += ` (troco: ${fmt(change)})`;
+  }
 
   _pendingOrder = {
     id:      Date.now().toString(),
@@ -944,6 +1032,11 @@ function confirmOrder(sent) {
     saveLoyalty(); updateLoyaltyUI(); renderHistory();
 
     cart = [];
+    payMethod = null;
+    document.getElementById('payPix').classList.remove('active');
+    document.getElementById('payCash').classList.remove('active');
+    document.getElementById('cashRow').classList.remove('show');
+    document.getElementById('cashAmount').value = '';
     renderCart(); updateSummary();
     showToast(t('toastSuccess'));
   } else {
@@ -1046,6 +1139,7 @@ function applyLang() {
     'step3title','step3sub','step4title','step4sub','step5title','step5sub',
     'addBtnText','cartTitle','cartSubtitle','addAnotherText',
     'userTitle','userSub','nameLabel','phoneLabel','addrLabel',
+    'payTitle','paySubtitle','payPixLabel','payCashLabel','cashLabel',
     'summaryTitle','totalLabel','orderBtnText','historyToggleText',
     'loyaltyLabel','loyaltyTitle','loyaltySub',
     'statSpentLabel','statDiscountLabel','statOrdersLabel','resetBtn',
